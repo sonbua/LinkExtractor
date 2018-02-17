@@ -13,7 +13,7 @@ namespace LinkExtractor.Core
         }
 
         public async Task<TResponse> ProcessAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : IRequest<TResponse>
+            where TResponse : IResponse<TRequest>
         {
             // LIFESTYLE: handlers are registered with scoped lifestyle
             var requestHandler = _container.Resolve<IRequestHandler<TRequest, TResponse>>();

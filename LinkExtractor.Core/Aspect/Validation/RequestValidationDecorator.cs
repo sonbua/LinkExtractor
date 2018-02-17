@@ -15,7 +15,7 @@ namespace LinkExtractor.Core.Aspect.Validation
         }
 
         public async Task<TResponse> ProcessAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : IRequest<TResponse>
+            where TResponse : IResponse<TRequest>
         {
             // LIFESTYLE: validators are registered with scoped lifestyle
             var validators = _container.ResolveAll<IValidator<TRequest>>();

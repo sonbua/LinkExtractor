@@ -8,7 +8,7 @@ namespace LinkExtractor.Core
     }
 
     public interface IRequestHandler<TRequest, TResponse> : IRequestHandler
-        where TRequest : IRequest<TResponse>
+        where TResponse : IResponse<TRequest>
     {
         Task<TResponse> HandleAsync(TRequest request);
     }
