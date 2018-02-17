@@ -7,7 +7,7 @@ using LinkExtractor.Core.IoC;
 
 namespace LinkExtractor.Core.Aspect.Validation
 {
-    public abstract class RuleBasedValidator<TRequest> : IValidator<TRequest>, IDisposable
+    public abstract class RuleBasedValidator<TRequest> : IValidator<TRequest>
     {
         private const string _INVALID_VALIDATION_RULE_TYPE = "Validation rule type {0} is not of type {1}.";
 
@@ -18,14 +18,6 @@ namespace LinkExtractor.Core.Aspect.Validation
         {
             _container = Container.Instance;
             _validationRules = new List<IValidationRule<TRequest>>();
-        }
-
-        public void Dispose()
-        {
-            foreach (var rule in _validationRules)
-            {
-                _container.Release(rule);
-            }
         }
 
         public async Task ValidateAsync(TRequest request)
@@ -41,6 +33,7 @@ namespace LinkExtractor.Core.Aspect.Validation
             return ValidateAsync((TRequest) request);
         }
 
+        // TODO: add generic method variant
         protected void AddRule(Type ruleType)
         {
             RequireOfTypeIValidationRule(ruleType);

@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Castle.Windsor;
-using LinkExtractor.Core.IoC;
 
 namespace LinkExtractor.Core.Aspect.Validation
 {
@@ -19,19 +17,12 @@ namespace LinkExtractor.Core.Aspect.Validation
         public async Task<TResponse> ProcessAsync<TRequest, TResponse>(TRequest request)
             where TRequest : IRequest<TResponse>
         {
-            var validatorType = typeof(IValidator<TRequest>);
+            // LIFESTYLE: validators are registered with scoped lifestyle
+            var validators = _container.ResolveAll<IValidator<TRequest>>();
 
-            using (var scope = Container.BeginCustomScope())
+            foreach (var validator in validators)
             {
-                var validators =
-                    ((IValidator[]) _container.ResolveAll(validatorType))
-                    .Select(x => x.TrackedBy(scope))
-                    .ToArray();
-
-                foreach (var validator in validators)
-                {
-                    await validator.ValidateAsync(request);
-                }
+                await validator.ValidateAsync(request);
             }
 
             return await _inner.ProcessAsync<TRequest, TResponse>(request);

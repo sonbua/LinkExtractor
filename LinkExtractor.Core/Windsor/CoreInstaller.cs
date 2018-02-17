@@ -28,7 +28,7 @@ namespace LinkExtractor.Core.Windsor
                 Component
                     .For(typeof(IValidator<>))
                     .ImplementedBy(typeof(BuiltInValidator<>))
-                    .LifestyleTransient()
+                    .LifestyleScoped()
             );
 
             // validation rules
@@ -37,7 +37,7 @@ namespace LinkExtractor.Core.Windsor
                     .FromAssembly(Assembly.GetCallingAssembly())
                     .BasedOn(typeof(IValidationRule<>))
                     .WithServiceSelf()
-                    .LifestyleTransient()
+                    .LifestyleScoped()
             );
         }
     }
