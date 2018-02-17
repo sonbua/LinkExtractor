@@ -5,19 +5,19 @@ using LinkExtractor.Core.IoC;
 
 namespace LinkExtractor.Core.Aspect.Validation
 {
-    public class RequestValidation<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
-        where TRequest : IRequest<TResponse>
+    public class RequestValidationDecorator : IRequestProcessor
     {
-        private readonly IRequestHandler<TRequest, TResponse> _inner;
+        private readonly IRequestProcessor _inner;
         private readonly IWindsorContainer _container;
 
-        public RequestValidation(IRequestHandler<TRequest, TResponse> inner, IWindsorContainer container)
+        public RequestValidationDecorator(IRequestProcessor inner, IWindsorContainer container)
         {
             _inner = inner;
             _container = container;
         }
 
-        public async Task<TResponse> HandleAsync(TRequest request)
+        public async Task<TResponse> ProcessAsync<TRequest, TResponse>(TRequest request)
+            where TRequest : IRequest<TResponse>
         {
             var validatorType = typeof(IValidator<TRequest>);
 
@@ -34,7 +34,7 @@ namespace LinkExtractor.Core.Aspect.Validation
                 }
             }
 
-            return await _inner.HandleAsync(request);
+            return await _inner.ProcessAsync<TRequest, TResponse>(request);
         }
     }
 }

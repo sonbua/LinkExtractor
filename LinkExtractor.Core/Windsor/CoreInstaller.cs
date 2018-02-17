@@ -15,6 +15,10 @@ namespace LinkExtractor.Core.Windsor
             container.Register(
                 Component
                     .For<IRequestProcessor>()
+                    .ImplementedBy<RequestValidationDecorator>()
+                    .LifestyleSingleton(),
+                Component
+                    .For<IRequestProcessor>()
                     .ImplementedBy<RequestProcessor>()
                     .LifestyleSingleton()
             );
