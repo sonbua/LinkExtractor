@@ -4,6 +4,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using LinkExtractor.Core.Aspect.Validation;
 using LinkExtractor.Core.Aspect.Validation.BuiltIn;
+using LinkExtractor.Core.IoC;
 
 namespace LinkExtractor.Core.Windsor
 {
@@ -11,6 +12,15 @@ namespace LinkExtractor.Core.Windsor
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            // container
+            Container.SetContainer(container);
+            container.Register(
+                Component
+                    .For<IWindsorContainer>()
+                    .Instance(container)
+                    .LifestyleSingleton()
+            );
+
             // processor
             container.Register(
                 Component
@@ -22,7 +32,7 @@ namespace LinkExtractor.Core.Windsor
                     .ImplementedBy<RequestProcessor>()
                     .LifestyleSingleton()
             );
-            
+
             // validators
             container.Register(
                 Component
@@ -34,7 +44,7 @@ namespace LinkExtractor.Core.Windsor
             // validation rules
             container.Register(
                 Classes
-                    .FromAssembly(Assembly.GetCallingAssembly())
+                    .FromAssembly(Assembly.GetExecutingAssembly())
                     .BasedOn(typeof(IValidationRule<>))
                     .WithServiceSelf()
                     .LifestyleScoped()
