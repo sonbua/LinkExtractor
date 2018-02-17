@@ -2,6 +2,7 @@
 
 namespace LinkExtractor.Core.Aspect.Validation
 {
+    // TODO: in need?
     public interface IValidator
     {
         Task ValidateAsync(object request);

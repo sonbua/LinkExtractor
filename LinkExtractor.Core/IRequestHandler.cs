@@ -2,6 +2,7 @@
 
 namespace LinkExtractor.Core
 {
+    // TODO: in need?
     public interface IRequestHandler
     {
     }

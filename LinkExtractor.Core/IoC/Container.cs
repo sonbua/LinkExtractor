@@ -15,6 +15,7 @@ namespace LinkExtractor.Core.IoC
             Instance = container;
         }
 
+        // TODO: in need?
         /// <summary>
         /// Creates an instance of <see cref="CustomScope"/> to track transient instances that were resolved manually.
         /// When the scope gets disposed, all tracked transient instances will get disposed too.
@@ -34,6 +35,7 @@ namespace LinkExtractor.Core.IoC
             return new CustomScope();
         }
 
+        // TODO: in need?
         public static TComponent TrackedBy<TComponent>(this TComponent component, CustomScope scope)
         {
             scope.Track(component);

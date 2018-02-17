@@ -4,6 +4,7 @@ using Castle.Core.Logging;
 
 namespace LinkExtractor.Core.IoC
 {
+    // TODO: in need?
     public class CustomScope : IDisposable
     {
         private const string _RELEASE_COMPONENT_FAILED = "Could not release component: {0}";
