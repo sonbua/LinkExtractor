@@ -28,11 +28,6 @@ namespace LinkExtractor.Core.Aspect.Validation
             }
         }
 
-        public Task ValidateAsync(object request)
-        {
-            return ValidateAsync((TRequest) request);
-        }
-
         protected void AddRule<TRule>()
             where TRule : IValidationRule<TRequest>
         {
