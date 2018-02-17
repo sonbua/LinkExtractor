@@ -4,8 +4,8 @@
     {
         public BuiltInValidator()
         {
-            AddRule(typeof(RequestMustNotBeNullRule<TRequest>));
-            AddRule(typeof(DataAnnotationValidationMustPassRule<>));
+            AddRule<RequestMustNotBeNullRule<TRequest>>();
+            AddRule<DataAnnotationValidationMustPassRule<TRequest>>();
         }
     }
 }

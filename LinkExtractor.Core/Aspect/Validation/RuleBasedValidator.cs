@@ -33,7 +33,14 @@ namespace LinkExtractor.Core.Aspect.Validation
             return ValidateAsync((TRequest) request);
         }
 
-        // TODO: add generic method variant
+        protected void AddRule<TRule>()
+            where TRule : IValidationRule<TRequest>
+        {
+            var rule = _container.Resolve<TRule>();
+
+            _validationRules.Add(rule);
+        }
+
         protected void AddRule(Type ruleType)
         {
             RequireOfTypeIValidationRule(ruleType);
