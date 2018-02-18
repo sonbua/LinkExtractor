@@ -8,7 +8,7 @@ namespace LinkExtractor.Core.Aspect.Validation.BuiltIn
     {
         public Task TestAsync(TRequest request)
         {
-            var validationContext = new ValidationContext(request, null, null);
+            var validationContext = new ValidationContext(request);
             var validationResults = new List<ValidationResult>();
 
             var requestIsValid =
