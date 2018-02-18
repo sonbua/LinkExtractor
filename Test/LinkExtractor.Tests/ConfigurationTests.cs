@@ -8,6 +8,7 @@ using Castle.Windsor;
 using Castle.Windsor.Diagnostics;
 using LinkExtractor.Core;
 using LinkExtractor.Core.Windsor;
+using LinkExtractor.Instagram.Windsor;
 using Xunit;
 
 namespace LinkExtractor.Tests
@@ -19,7 +20,8 @@ namespace LinkExtractor.Tests
             _container = new WindsorContainer();
 
             _container.Install(
-                new CoreInstaller()
+                new CoreInstaller(),
+                new InstagramInstaller()
             );
 
             Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
