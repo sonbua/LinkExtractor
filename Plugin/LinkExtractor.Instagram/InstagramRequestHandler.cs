@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using LinkExtractor.Core;
@@ -29,13 +30,32 @@ namespace LinkExtractor.Instagram
 
             var model = JsonConvert.DeserializeObject<InstagramSharedDataModel>(json);
 
-            var originalDisplayResources = model
-                .entry_data
-                .PostPage
-                .First()
-                .graphql
-                .shortcode_media
-                .display_resources;
+            var media = ExtractAllMedia(model.entry_data.PostPage.First().graphql.shortcode_media);
+
+            return new InstagramResponse
+            {
+                Media = media.ToArray()
+            };
+        }
+
+        private IEnumerable<InstagramResponse.Medium> ExtractAllMedia(
+            InstagramSharedDataModel.ShortcodeMedia primaryMediumModel)
+        {
+            var primaryMedium = ExtractMedium(primaryMediumModel);
+
+            yield return primaryMedium;
+
+            var childMedia = ExtractChildMedia(primaryMediumModel.edge_sidecar_to_children);
+
+            foreach (var childMedium in childMedia)
+            {
+                yield return childMedium;
+            }
+        }
+
+        private InstagramResponse.Medium ExtractMedium(InstagramSharedDataModel.Node node)
+        {
+            var originalDisplayResources = node.display_resources;
 
             var displayResources =
                 originalDisplayResources
@@ -48,16 +68,24 @@ namespace LinkExtractor.Instagram
                         })
                     .ToArray();
 
-            return new InstagramResponse
+            return new InstagramResponse.Medium
             {
-                Media = new[]
-                {
-                    new InstagramResponse.Medium
-                    {
-                        DisplayResources = displayResources
-                    }
-                }
+                DisplayResources = displayResources
             };
+        }
+
+        private IEnumerable<InstagramResponse.Medium> ExtractChildMedia(
+            InstagramSharedDataModel.EdgeSidecarToChildren children)
+        {
+            if (children == null)
+            {
+                yield break;
+            }
+
+            foreach (var edge in children.edges)
+            {
+                yield return ExtractMedium(edge.node);
+            }
         }
     }
 }

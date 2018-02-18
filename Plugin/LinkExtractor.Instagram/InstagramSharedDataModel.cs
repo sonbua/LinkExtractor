@@ -34,14 +34,8 @@ namespace LinkExtractor.Instagram
             public IList<Edge> edges { get; set; }
         }
 
-        public class ShortcodeMedia
+        public class ShortcodeMedia : Node
         {
-            public string shortcode { get; set; }
-
-            public IList<DisplayResource> display_resources { get; set; }
-
-            public bool is_video { get; set; }
-
             public EdgeSidecarToChildren edge_sidecar_to_children { get; set; }
         }
 

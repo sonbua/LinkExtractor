@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Castle.MicroKernel.Lifestyle;
 using Castle.Windsor;
@@ -49,6 +50,23 @@ namespace LinkExtractor.Instagram.Tests
             // assert
             Assert.Single(response.Media);
             Assert.NotEmpty(response.Media[0].DisplayResources);
+        }
+
+        [Theory]
+        [InlineData("https://www.instagram.com/p/BfVLhdLBnlm/")]
+        public async Task GivenAValidInstagramUrlWithMultipleImages_ReturnsAllMediaWithCorrectLinks(
+            string url)
+        {
+            // arrange
+            var request = new InstagramRequest {Url = url};
+            var processor = _container.Resolve<IRequestProcessor>();
+
+            // act
+            var response = await processor.ProcessAsync<InstagramRequest, InstagramResponse>(request);
+
+            // assert
+            Assert.NotEqual(expected: 1, actual: response.Media.Length);
+            Assert.True(response.Media.All(x => x.DisplayResources.Any()));
         }
     }
 }
