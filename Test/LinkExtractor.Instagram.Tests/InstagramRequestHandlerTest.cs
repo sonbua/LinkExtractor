@@ -54,8 +54,7 @@ namespace LinkExtractor.Instagram.Tests
 
         [Theory]
         [InlineData("https://www.instagram.com/p/BfVLhdLBnlm/")]
-        public async Task GivenAValidInstagramUrlWithMultipleImages_ReturnsAllMediaWithCorrectLinks(
-            string url)
+        public async Task GivenAValidInstagramUrlWithMultipleImages_ReturnsAllMediaWithCorrectLinks(string url)
         {
             // arrange
             var request = new InstagramRequest {Url = url};
@@ -67,6 +66,24 @@ namespace LinkExtractor.Instagram.Tests
             // assert
             Assert.NotEqual(expected: 1, actual: response.Media.Length);
             Assert.True(response.Media.All(x => x.DisplayResources.Any()));
+        }
+
+        [Theory]
+        [InlineData("https://www.instagram.com/p/BfUtyjyhgCK/")]
+        public async Task GivenAValidInstagramUrlWithVideo_ReturnsVideoLink(string url)
+        {
+            // arrange
+            var request = new InstagramRequest {Url = url};
+            var processor = _container.Resolve<IRequestProcessor>();
+
+            // act
+            var response = await processor.ProcessAsync<InstagramRequest, InstagramResponse>(request);
+
+            // assert
+            Assert.Single(response.Media);
+            Assert.True(response.Media[0].IsVideo);
+            Assert.NotEmpty(response.Media[0].VideoUrl);
+            Assert.NotEmpty(response.Media[0].DisplayResources);
         }
     }
 }

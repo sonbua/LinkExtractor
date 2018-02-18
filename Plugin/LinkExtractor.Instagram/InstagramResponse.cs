@@ -9,6 +9,10 @@ namespace LinkExtractor.Instagram
         public class Medium
         {
             public DisplayResource[] DisplayResources { get; set; }
+
+            public bool IsVideo { get; set; }
+
+            public string VideoUrl { get; set; }
         }
 
         public class DisplayResource

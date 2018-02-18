@@ -70,7 +70,9 @@ namespace LinkExtractor.Instagram
 
             return new InstagramResponse.Medium
             {
-                DisplayResources = displayResources
+                DisplayResources = displayResources,
+                IsVideo = node.is_video,
+                VideoUrl = node.video_url
             };
         }
 

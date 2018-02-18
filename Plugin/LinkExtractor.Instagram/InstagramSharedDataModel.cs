@@ -21,6 +21,8 @@ namespace LinkExtractor.Instagram
 
             public IList<DisplayResource> display_resources { get; set; }
 
+            public string video_url { get; set; }
+
             public bool is_video { get; set; }
         }
 
