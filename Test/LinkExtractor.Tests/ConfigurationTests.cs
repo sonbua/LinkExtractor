@@ -61,7 +61,7 @@ namespace LinkExtractor.Tests
             // act
             using (_container.BeginScope())
             {
-                var requestHandlers = _container.ResolveAll<IRequestHandler>();
+                _container.ResolveAll<IRequestHandler>();
             }
 
             // assert
