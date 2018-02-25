@@ -1,22 +1,22 @@
-﻿using System.Threading.Tasks;
-using Castle.Windsor;
+﻿using System;
+using System.Threading.Tasks;
+using LinkExtractor.Core.DependencyInjection;
 
 namespace LinkExtractor.Core
 {
     public class RequestProcessor : IRequestProcessor
     {
-        private readonly IWindsorContainer _container;
+        private readonly IServiceProvider _serviceProvider;
 
-        public RequestProcessor(IWindsorContainer container)
+        public RequestProcessor(IServiceProvider serviceProvider)
         {
-            _container = container;
+            _serviceProvider = serviceProvider;
         }
 
         public async Task<TResponse> ProcessAsync<TRequest, TResponse>(TRequest request)
             where TResponse : IResponse<TRequest>
         {
-            // LIFESTYLE: handlers are registered with scoped lifestyle
-            var requestHandler = _container.Resolve<IRequestHandler<TRequest, TResponse>>();
+            var requestHandler = _serviceProvider.GetService<IRequestHandler<TRequest, TResponse>>();
 
             return await requestHandler.HandleAsync(request);
         }

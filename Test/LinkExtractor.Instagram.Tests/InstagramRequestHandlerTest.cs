@@ -1,30 +1,32 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Castle.MicroKernel.Lifestyle;
-using Castle.Windsor;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using LinkExtractor.Core;
-using LinkExtractor.Core.Windsor;
-using LinkExtractor.Instagram.Windsor;
+using LinkExtractor.Core.DependencyRegistration;
+using LinkExtractor.Instagram.DependencyRegistration;
 using Xunit;
 
 namespace LinkExtractor.Instagram.Tests
 {
     public class InstagramRequestHandlerTest : IDisposable
     {
-        private readonly IWindsorContainer _container;
-        private readonly IDisposable _scope;
+        private readonly IContainer _container;
+        private readonly ILifetimeScope _scope;
 
         public InstagramRequestHandlerTest()
         {
-            _container = new WindsorContainer();
+            var builder = new ContainerBuilder();
 
-            _container.Install(
-                new CoreInstaller(),
-                new InstagramInstaller()
-            );
+            builder.RegisterType<AutofacServiceProvider>().As<IServiceProvider>();
 
-            _scope = _container.BeginScope();
+            builder.RegisterModule<CoreModule>()
+                .RegisterModule<InstagramModule>();
+
+            _container = builder.Build();
+
+            _scope = _container.BeginLifetimeScope();
         }
 
         public void Dispose()
@@ -42,7 +44,7 @@ namespace LinkExtractor.Instagram.Tests
         {
             // arrange
             var request = new InstagramRequest {Url = url};
-            var processor = _container.Resolve<IRequestProcessor>();
+            var processor = _scope.Resolve<IRequestProcessor>();
 
             // act
             var response = await processor.ProcessAsync<InstagramRequest, InstagramResponse>(request);
@@ -58,7 +60,7 @@ namespace LinkExtractor.Instagram.Tests
         {
             // arrange
             var request = new InstagramRequest {Url = url};
-            var processor = _container.Resolve<IRequestProcessor>();
+            var processor = _scope.Resolve<IRequestProcessor>();
 
             // act
             var response = await processor.ProcessAsync<InstagramRequest, InstagramResponse>(request);
@@ -74,7 +76,7 @@ namespace LinkExtractor.Instagram.Tests
         {
             // arrange
             var request = new InstagramRequest {Url = url};
-            var processor = _container.Resolve<IRequestProcessor>();
+            var processor = _scope.Resolve<IRequestProcessor>();
 
             // act
             var response = await processor.ProcessAsync<InstagramRequest, InstagramResponse>(request);

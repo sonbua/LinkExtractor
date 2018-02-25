@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Text;
-using Castle.MicroKernel;
-using Castle.MicroKernel.Handlers;
-using Castle.MicroKernel.Lifestyle;
-using Castle.Windsor;
-using Castle.Windsor.Diagnostics;
+using System.Collections.Generic;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using LinkExtractor.Core;
-using LinkExtractor.Core.Windsor;
-using LinkExtractor.Instagram.Windsor;
+using LinkExtractor.Core.Aspect.Validation;
+using LinkExtractor.Core.DependencyRegistration;
+using LinkExtractor.Instagram.DependencyRegistration;
 using Xunit;
 
 namespace LinkExtractor.Tests
@@ -17,42 +14,43 @@ namespace LinkExtractor.Tests
     {
         public ConfigurationTests()
         {
-            _container = new WindsorContainer();
+            var builder = new ContainerBuilder();
 
-            _container.Install(
-                new CoreInstaller(),
-                new InstagramInstaller()
-            );
+            builder
+                .RegisterType<AutofacServiceProvider>()
+                .As<IServiceProvider>()
+                .InstancePerLifetimeScope();
 
-            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+            builder.RegisterModule<CoreModule>()
+                .RegisterModule<InstagramModule>();
+
+            _container = builder.Build();
+
+            _scope = _container.BeginLifetimeScope();
         }
 
-        private readonly IWindsorContainer _container;
+        private readonly IContainer _container;
+        private readonly ILifetimeScope _scope;
 
         [Fact]
-        public void EnsuresNoPotentiallyMisconfiguredComponents()
+        public void EnsuresAllValidatorsCanBeResolvedSuccessfully()
         {
-            // Inspect the container for problems
-            var key = SubSystemConstants.DiagnosticsKey;
-            var host = (IDiagnosticsHost) _container.Kernel.GetSubSystem(key);
-            var diagnostic = host.GetDiagnostic<IPotentiallyMisconfiguredComponentsDiagnostic>();
-            var handlers = diagnostic.Inspect();
+            // arrange
 
-            // Iterate over the problems, writing messages to the console
-            foreach (var handler in handlers)
-            {
-                var problem = (IExposeDependencyInfo) handler;
+            // act
+            _scope.Resolve<IEnumerable<IValidator>>();
 
-                var message = new StringBuilder();
-                var inspector = new DependencyInspector(message);
+            // assert
+        }
+        [Fact]
+        public void EnsuresAllValidationRulesCanBeResolvedSuccessfully()
+        {
+            // arrange
 
-                problem.ObtainDependencyDetails(inspector);
+            // act
+            _scope.Resolve(typeof(IEnumerable<IValidationRule>));
 
-                Trace.WriteLine(message.ToString());
-            }
-
-            // Fail the test if there are any problems
-            Assert.Empty(handlers);
+            // assert
         }
 
         [Fact]
@@ -61,10 +59,7 @@ namespace LinkExtractor.Tests
             // arrange
 
             // act
-            using (_container.BeginScope())
-            {
-                _container.ResolveAll<IRequestHandler>();
-            }
+            _scope.Resolve<IEnumerable<IRequestHandler>>();
 
             // assert
         }

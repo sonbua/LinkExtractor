@@ -1,31 +1,30 @@
-﻿using System.Threading.Tasks;
-using Castle.Windsor;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LinkExtractor.Core.Aspect.Validation
 {
-    public class RequestValidationDecorator : IRequestProcessor
+    public class RequestValidationDecorator<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+        where TResponse : IResponse<TRequest>
     {
-        private readonly IRequestProcessor _inner;
-        private readonly IWindsorContainer _container;
+        private readonly IEnumerable<IValidator<TRequest>> _validators;
+        private readonly IRequestHandler<TRequest, TResponse> _inner;
 
-        public RequestValidationDecorator(IRequestProcessor inner, IWindsorContainer container)
+        public RequestValidationDecorator(
+            IEnumerable<IValidator<TRequest>> validators,
+            IRequestHandler<TRequest, TResponse> inner)
         {
+            _validators = validators;
             _inner = inner;
-            _container = container;
         }
 
-        public async Task<TResponse> ProcessAsync<TRequest, TResponse>(TRequest request)
-            where TResponse : IResponse<TRequest>
+        public async Task<TResponse> HandleAsync(TRequest request)
         {
-            // LIFESTYLE: validators are registered with scoped lifestyle
-            var validators = _container.ResolveAll<IValidator<TRequest>>();
-
-            foreach (var validator in validators)
+            foreach (var validator in _validators)
             {
                 await validator.ValidateAsync(request);
             }
 
-            return await _inner.ProcessAsync<TRequest, TResponse>(request);
+            return await _inner.HandleAsync(request);
         }
     }
 }
