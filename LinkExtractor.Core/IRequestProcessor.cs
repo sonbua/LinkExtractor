@@ -8,6 +8,6 @@ namespace LinkExtractor.Core
         Task<TResponse> ProcessAsync<TRequest, TResponse>(TRequest request)
             where TResponse : IResponse<TRequest>;
 
-        Task<object> ProcessAsync(object request, Type responseType);
+        Task<object> ProcessAsync(object request, Type requestHandlerType);
     }
 }
