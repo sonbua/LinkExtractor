@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace LinkExtractor.Core
 {
@@ -6,5 +7,7 @@ namespace LinkExtractor.Core
     {
         Task<TResponse> ProcessAsync<TRequest, TResponse>(TRequest request)
             where TResponse : IResponse<TRequest>;
+
+        Task<object> ProcessAsync(object request, Type responseType);
     }
 }

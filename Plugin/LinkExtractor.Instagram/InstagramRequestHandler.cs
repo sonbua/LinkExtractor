@@ -7,11 +7,11 @@ using Newtonsoft.Json;
 
 namespace LinkExtractor.Instagram
 {
-    public class InstagramRequestHandler : IRequestHandler<InstagramRequest, InstagramResponse>
+    public class InstagramRequestHandler : BaseRequestHandler<InstagramRequest, InstagramResponse>
     {
         private const string _WINDOW_SHARED_DATA_VARIABLE_KEY = "window._sharedData = ";
 
-        public virtual async Task<InstagramResponse> HandleAsync(InstagramRequest request)
+        public override async Task<InstagramResponse> HandleAsync(InstagramRequest request)
         {
             var htmlWeb = new HtmlWeb();
 

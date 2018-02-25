@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace LinkExtractor.Core.Aspect.Validation
 {
-    public class RequestValidationDecorator<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+    public class RequestValidationDecorator<TRequest, TResponse> : BaseRequestHandler<TRequest, TResponse>
         where TResponse : IResponse<TRequest>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
@@ -17,7 +17,7 @@ namespace LinkExtractor.Core.Aspect.Validation
             _inner = inner;
         }
 
-        public async Task<TResponse> HandleAsync(TRequest request)
+        public override async Task<TResponse> HandleAsync(TRequest request)
         {
             foreach (var validator in _validators)
             {

@@ -20,5 +20,14 @@ namespace LinkExtractor.Core
 
             return await requestHandler.HandleAsync(request);
         }
+
+        public async Task<object> ProcessAsync(object request, Type responseType)
+        {
+            var requestHandlerType = typeof(IRequestHandler<,>).MakeGenericType(request.GetType(), responseType);
+
+            var requestHandler = (IRequestHandler) _serviceProvider.GetService(requestHandlerType);
+
+            return await requestHandler.HandleAsync(request);
+        }
     }
 }
