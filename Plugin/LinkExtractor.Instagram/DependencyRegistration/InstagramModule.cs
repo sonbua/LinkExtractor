@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Autofac;
 using LinkExtractor.Core;
+using LinkExtractor.Core.Aspect.Preprocessing;
 using LinkExtractor.Core.Aspect.Validation;
 using LinkExtractor.Core.DependencyRegistration;
 using Module = Autofac.Module;
@@ -13,6 +14,12 @@ namespace LinkExtractor.Instagram.DependencyRegistration
         {
             var thisAssembly = Assembly.GetExecutingAssembly();
 
+            builder
+                .RegisterAssemblyTypes(thisAssembly)
+                .AsClosedTypesOf(typeof(IPreprocessor<>))
+                .As<IPreprocessor>()
+                .InstancePerLifetimeScope();
+            
             builder
                 .RegisterAssemblyTypes(thisAssembly)
                 .AsClosedTypesOf(typeof(IValidator<>))
@@ -35,7 +42,14 @@ namespace LinkExtractor.Instagram.DependencyRegistration
                 .RegisterGenericDecorator(
                     typeof(RequestValidationDecorator<,>),
                     typeof(IRequestHandler<,>),
-                    "requestHandler")
+                    "requestHandler",
+                    "requestValidation")
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterGenericDecorator(
+                    typeof(RequestPreprocessingDecorator<,>),
+                    typeof(IRequestHandler<,>),
+                    "requestValidation")
                 .InstancePerLifetimeScope();
         }
     }

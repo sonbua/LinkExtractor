@@ -5,6 +5,8 @@ using System.Reflection;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Features.Scanning;
+using LinkExtractor.Core.Aspect.Preprocessing;
+using LinkExtractor.Core.Aspect.Preprocessing.BuiltIn;
 using LinkExtractor.Core.Aspect.Validation;
 using LinkExtractor.Core.Aspect.Validation.BuiltIn;
 using Module = Autofac.Module;
@@ -19,6 +21,11 @@ namespace LinkExtractor.Core.DependencyRegistration
                 .RegisterType<RequestProcessor>()
                 .As<IRequestProcessor>()
                 .InstancePerLifetimeScope();
+
+            builder
+                .RegisterGeneric(typeof(TrimStringPreprocessor<>))
+                .As(typeof(IPreprocessor<>))
+                .SingleInstance();
 
             builder
                 .RegisterGeneric(typeof(BuiltInValidator<>))

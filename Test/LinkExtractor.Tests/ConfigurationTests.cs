@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using LinkExtractor.Core;
+using LinkExtractor.Core.Aspect.Preprocessing;
 using LinkExtractor.Core.Aspect.Validation;
 using LinkExtractor.Core.DependencyRegistration;
 using LinkExtractor.Instagram.DependencyRegistration;
@@ -31,6 +32,17 @@ namespace LinkExtractor.Tests
 
         private readonly IContainer _container;
         private readonly ILifetimeScope _scope;
+
+        [Fact]
+        public void EnsuresAllPreprocessorsCanBeResolvedSuccessfully()
+        {
+            // arrange
+
+            // act
+            _scope.Resolve<IEnumerable<IPreprocessor>>();
+
+            // assert
+        }
 
         [Fact]
         public void EnsuresAllValidatorsCanBeResolvedSuccessfully()
