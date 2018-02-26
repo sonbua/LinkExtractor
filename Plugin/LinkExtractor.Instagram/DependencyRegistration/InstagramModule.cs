@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Autofac;
 using LinkExtractor.Core;
+using LinkExtractor.Core.Aspect.Caching;
 using LinkExtractor.Core.Aspect.Preprocessing;
 using LinkExtractor.Core.Aspect.Validation;
 using LinkExtractor.Core.DependencyRegistration;
@@ -19,7 +20,7 @@ namespace LinkExtractor.Instagram.DependencyRegistration
                 .AsClosedTypesOf(typeof(IPreprocessor<>))
                 .As<IPreprocessor>()
                 .InstancePerLifetimeScope();
-            
+
             builder
                 .RegisterAssemblyTypes(thisAssembly)
                 .AsClosedTypesOf(typeof(IValidator<>))
@@ -35,21 +36,30 @@ namespace LinkExtractor.Instagram.DependencyRegistration
 
             builder
                 .RegisterAssemblyTypes(thisAssembly)
-                .AsClosedTypesOf(typeof(IRequestHandler<,>), "requestHandler")
+                .AsClosedTypesOf(
+                    openGenericServiceType: typeof(IRequestHandler<,>),
+                    serviceKey: "requestHandler")
                 .As<IRequestHandler>()
                 .InstancePerLifetimeScope();
             builder
                 .RegisterGenericDecorator(
-                    typeof(RequestValidationDecorator<,>),
-                    typeof(IRequestHandler<,>),
-                    "requestHandler",
-                    "requestValidation")
+                    decoratorType: typeof(RequestValidationDecorator<,>),
+                    decoratedServiceType: typeof(IRequestHandler<,>),
+                    fromKey: "requestHandler",
+                    toKey: "requestValidation")
                 .InstancePerLifetimeScope();
             builder
                 .RegisterGenericDecorator(
-                    typeof(RequestPreprocessingDecorator<,>),
-                    typeof(IRequestHandler<,>),
-                    "requestValidation")
+                    decoratorType: typeof(RequestPreprocessingDecorator<,>),
+                    decoratedServiceType: typeof(IRequestHandler<,>),
+                    fromKey: "requestValidation",
+                    toKey: "requestPreprocessing")
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterGenericDecorator(
+                    decoratorType: typeof(RequestCachingDecorator<,>),
+                    decoratedServiceType: typeof(IRequestHandler<,>),
+                    fromKey: "requestPreprocessing")
                 .InstancePerLifetimeScope();
         }
     }

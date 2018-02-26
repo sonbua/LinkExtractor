@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using LinkExtractor.Core.Aspect.Caching;
 
 namespace LinkExtractor.Instagram
 {
+    [CacheableResponse]
     public class InstagramRequest
     {
         [Required]

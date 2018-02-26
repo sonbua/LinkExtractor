@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Caching;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Features.Scanning;
@@ -21,6 +22,10 @@ namespace LinkExtractor.Core.DependencyRegistration
                 .RegisterType<RequestProcessor>()
                 .As<IRequestProcessor>()
                 .InstancePerLifetimeScope();
+
+            builder
+                .RegisterInstance(new MemoryCache("ResponseCache"))
+                .SingleInstance();
 
             builder
                 .RegisterGeneric(typeof(TrimStringPreprocessor<>))
