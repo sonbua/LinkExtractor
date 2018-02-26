@@ -11,7 +11,7 @@ using Xunit;
 
 namespace LinkExtractor.Tests
 {
-    public class ConfigurationTests
+    public class ConfigurationTests : IDisposable
     {
         public ConfigurationTests()
         {
@@ -28,6 +28,12 @@ namespace LinkExtractor.Tests
             _container = builder.Build();
 
             _scope = _container.BeginLifetimeScope();
+        }
+
+        public void Dispose()
+        {
+            _scope?.Dispose();
+            _container?.Dispose();
         }
 
         private readonly IContainer _container;
@@ -54,6 +60,7 @@ namespace LinkExtractor.Tests
 
             // assert
         }
+
         [Fact]
         public void EnsuresAllValidationRulesCanBeResolvedSuccessfully()
         {
