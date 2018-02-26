@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace LinkExtractor.Core.Aspect.Preprocessing
+namespace Cqrs.Aspect.Preprocessing
 {
     public interface IPreprocessor
     {

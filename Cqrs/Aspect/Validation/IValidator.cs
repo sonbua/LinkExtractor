@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace LinkExtractor.Core.Aspect.Validation
+namespace Cqrs.Aspect.Validation
 {
     public interface IValidator
     {

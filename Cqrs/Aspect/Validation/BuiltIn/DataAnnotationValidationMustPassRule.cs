@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
-namespace LinkExtractor.Core.Aspect.Validation.BuiltIn
+namespace Cqrs.Aspect.Validation.BuiltIn
 {
     public class DataAnnotationValidationMustPassRule<TRequest> : IValidationRule<TRequest>
     {

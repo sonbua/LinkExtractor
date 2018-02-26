@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using LinkExtractor.Core.DependencyInjection;
+using Cqrs.DependencyInjection;
 
-namespace LinkExtractor.Core
+namespace Cqrs
 {
     public class RequestProcessor : IRequestProcessor
     {

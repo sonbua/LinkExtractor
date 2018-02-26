@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace LinkExtractor.Core.Aspect.Validation.BuiltIn
+namespace Cqrs.Aspect.Validation.BuiltIn
 {
     public class CompositeValidationException : ValidationException
     {

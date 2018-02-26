@@ -6,13 +6,13 @@ using System.Runtime.Caching;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Features.Scanning;
-using LinkExtractor.Core.Aspect.Preprocessing;
-using LinkExtractor.Core.Aspect.Preprocessing.BuiltIn;
-using LinkExtractor.Core.Aspect.Validation;
-using LinkExtractor.Core.Aspect.Validation.BuiltIn;
+using Cqrs.Aspect.Preprocessing;
+using Cqrs.Aspect.Preprocessing.BuiltIn;
+using Cqrs.Aspect.Validation;
+using Cqrs.Aspect.Validation.BuiltIn;
 using Module = Autofac.Module;
 
-namespace LinkExtractor.Core.DependencyRegistration
+namespace Cqrs.DependencyRegistration
 {
     public class CoreModule : Module
     {

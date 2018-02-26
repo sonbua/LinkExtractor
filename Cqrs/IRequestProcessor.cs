@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace LinkExtractor.Core
+namespace Cqrs
 {
     public interface IRequestProcessor
     {

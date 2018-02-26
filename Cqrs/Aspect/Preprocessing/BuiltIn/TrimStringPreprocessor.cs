@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace LinkExtractor.Core.Aspect.Preprocessing.BuiltIn
+namespace Cqrs.Aspect.Preprocessing.BuiltIn
 {
     /// <summary>
     /// Trims all string properties on request objects automatically.

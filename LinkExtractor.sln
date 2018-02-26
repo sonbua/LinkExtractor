@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkExtractor.Core", "LinkExtractor.Core\LinkExtractor.Core.csproj", "{D8992BF5-D7BD-4540-8279-05678B583C4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cqrs", "Cqrs\Cqrs.csproj", "{D8992BF5-D7BD-4540-8279-05678B583C4D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkExtractor.Tests", "Test\LinkExtractor.Tests\LinkExtractor.Tests.csproj", "{F6B5BCB7-2F34-4EA7-A043-D8F8B1BE6180}"
 EndProject

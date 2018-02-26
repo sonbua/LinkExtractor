@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace LinkExtractor.Core
+namespace Cqrs
 {
     public abstract class BaseRequestHandler<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
         where TResponse : IResponse<TRequest>

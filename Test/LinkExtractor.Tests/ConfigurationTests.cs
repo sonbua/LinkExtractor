@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using LinkExtractor.Core;
-using LinkExtractor.Core.Aspect.Preprocessing;
-using LinkExtractor.Core.Aspect.Validation;
-using LinkExtractor.Core.DependencyRegistration;
+using Cqrs;
+using Cqrs.Aspect.Preprocessing;
+using Cqrs.Aspect.Validation;
+using Cqrs.DependencyRegistration;
 using LinkExtractor.Instagram.DependencyRegistration;
 using Xunit;
 

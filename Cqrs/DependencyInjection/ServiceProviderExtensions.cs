@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LinkExtractor.Core.DependencyInjection
+namespace Cqrs.DependencyInjection
 {
     public static class ServiceProviderExtensions
     {

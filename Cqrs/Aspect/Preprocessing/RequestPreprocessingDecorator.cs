@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LinkExtractor.Core.Aspect.Preprocessing
+namespace Cqrs.Aspect.Preprocessing
 {
     public class RequestPreprocessingDecorator<TRequest, TResponse> : BaseRequestHandler<TRequest, TResponse>
         where TResponse : IResponse<TRequest>

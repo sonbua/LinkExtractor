@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LinkExtractor.Core.DependencyInjection;
+using Cqrs.DependencyInjection;
 
-namespace LinkExtractor.Core.Aspect.Validation
+namespace Cqrs.Aspect.Validation
 {
     public abstract class RuleBasedValidator<TRequest> : IValidator<TRequest>
     {

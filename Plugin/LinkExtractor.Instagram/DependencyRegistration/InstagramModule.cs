@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 using Autofac;
-using LinkExtractor.Core;
-using LinkExtractor.Core.Aspect.Caching;
-using LinkExtractor.Core.Aspect.Preprocessing;
-using LinkExtractor.Core.Aspect.Validation;
-using LinkExtractor.Core.DependencyRegistration;
+using Cqrs;
+using Cqrs.Aspect.Caching;
+using Cqrs.Aspect.Preprocessing;
+using Cqrs.Aspect.Validation;
+using Cqrs.DependencyRegistration;
 using Module = Autofac.Module;
 
 namespace LinkExtractor.Instagram.DependencyRegistration

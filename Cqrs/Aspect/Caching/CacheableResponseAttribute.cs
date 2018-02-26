@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LinkExtractor.Core.Aspect.Caching
+namespace Cqrs.Aspect.Caching
 {
     public class CacheableResponseAttribute : Attribute
     {

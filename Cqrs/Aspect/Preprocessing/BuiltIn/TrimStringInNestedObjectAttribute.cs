@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LinkExtractor.Core.Aspect.Preprocessing.BuiltIn
+namespace Cqrs.Aspect.Preprocessing.BuiltIn
 {
     public class TrimStringInNestedObjectAttribute : Attribute
     {

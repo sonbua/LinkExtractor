@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LinkExtractor.Core.Aspect.Validation
+namespace Cqrs.Aspect.Validation
 {
     public class RequestValidationDecorator<TRequest, TResponse> : BaseRequestHandler<TRequest, TResponse>
         where TResponse : IResponse<TRequest>

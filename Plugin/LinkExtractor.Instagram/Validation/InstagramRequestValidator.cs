@@ -1,5 +1,5 @@
 ﻿using System;
-using LinkExtractor.Core.Aspect.Validation;
+using Cqrs.Aspect.Validation;
 
 namespace LinkExtractor.Instagram.Validation
 {

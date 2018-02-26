@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace LinkExtractor.Core.Aspect.Validation.BuiltIn
+namespace Cqrs.Aspect.Validation.BuiltIn
 {
     public class RequestMustBeNotNullRule<TRequest> : IValidationRule<TRequest>
     {

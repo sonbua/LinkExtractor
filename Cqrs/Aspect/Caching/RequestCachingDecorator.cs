@@ -4,7 +4,7 @@ using System.Runtime.Caching;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace LinkExtractor.Core.Aspect.Caching
+namespace Cqrs.Aspect.Caching
 {
     public class RequestCachingDecorator<TRequest, TResponse> : BaseRequestHandler<TRequest, TResponse>
         where TResponse : IResponse<TRequest>

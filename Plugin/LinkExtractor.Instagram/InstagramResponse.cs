@@ -1,4 +1,4 @@
-﻿using LinkExtractor.Core;
+﻿using Cqrs;
 
 namespace LinkExtractor.Instagram
 {

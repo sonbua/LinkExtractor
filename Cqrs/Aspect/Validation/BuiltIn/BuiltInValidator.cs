@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LinkExtractor.Core.Aspect.Validation.BuiltIn
+namespace Cqrs.Aspect.Validation.BuiltIn
 {
     public class BuiltInValidator<TRequest> : RuleBasedValidator<TRequest>
     {
