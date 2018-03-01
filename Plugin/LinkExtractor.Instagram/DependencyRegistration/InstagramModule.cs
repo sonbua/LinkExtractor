@@ -5,7 +5,7 @@ using Cqrs.Aspect.Caching;
 using Cqrs.Aspect.Postprocessing;
 using Cqrs.Aspect.Preprocessing;
 using Cqrs.Aspect.Validation;
-using Cqrs.DependencyRegistration;
+using Cqrs.DependencyRegistration.Autofac;
 using Module = Autofac.Module;
 
 namespace LinkExtractor.Instagram.DependencyRegistration

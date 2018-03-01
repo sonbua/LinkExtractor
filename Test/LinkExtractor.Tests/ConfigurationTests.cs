@@ -5,7 +5,7 @@ using Autofac.Extensions.DependencyInjection;
 using Cqrs;
 using Cqrs.Aspect.Preprocessing;
 using Cqrs.Aspect.Validation;
-using Cqrs.DependencyRegistration;
+using Cqrs.DependencyRegistration.Autofac;
 using LinkExtractor.Instagram.DependencyRegistration;
 using Xunit;
 

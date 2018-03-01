@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Cqrs;
-using Cqrs.DependencyRegistration;
+using Cqrs.DependencyRegistration.Autofac;
 using LinkExtractor.Instagram.DependencyRegistration;
 using Xunit;
 

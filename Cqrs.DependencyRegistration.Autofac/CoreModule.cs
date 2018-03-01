@@ -12,7 +12,7 @@ using Cqrs.Aspect.Validation;
 using Cqrs.Aspect.Validation.BuiltIn;
 using Module = Autofac.Module;
 
-namespace Cqrs.DependencyRegistration
+namespace Cqrs.DependencyRegistration.Autofac
 {
     public class CoreModule : Module
     {

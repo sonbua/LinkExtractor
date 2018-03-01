@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkExtractor.Instagram", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkExtractor.Instagram.Tests", "Test\LinkExtractor.Instagram.Tests\LinkExtractor.Instagram.Tests.csproj", "{08956770-8014-47B7-B5A0-1928EB8E905F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cqrs.DependencyRegistration.Autofac", "Cqrs.DependencyRegistration.Autofac\Cqrs.DependencyRegistration.Autofac.csproj", "{BFF95C18-172E-4B74-975F-FB13CE2BEA3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{08956770-8014-47B7-B5A0-1928EB8E905F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08956770-8014-47B7-B5A0-1928EB8E905F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08956770-8014-47B7-B5A0-1928EB8E905F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFF95C18-172E-4B74-975F-FB13CE2BEA3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF95C18-172E-4B74-975F-FB13CE2BEA3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF95C18-172E-4B74-975F-FB13CE2BEA3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF95C18-172E-4B74-975F-FB13CE2BEA3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5BE92DA9-4C90-4E81-95C9-3B0A7D20BDEF} = {279CCB5C-D03C-449D-87A0-390B42D247A4}
