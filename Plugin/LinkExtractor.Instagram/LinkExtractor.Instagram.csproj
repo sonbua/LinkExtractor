@@ -9,7 +9,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Cqrs.DependencyRegistration.Autofac\Cqrs.DependencyRegistration.Autofac.csproj" />
+    <ProjectReference Include="..\..\R2.DependencyRegistration.Autofac\R2.DependencyRegistration.Autofac.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.6.17" />

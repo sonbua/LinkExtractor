@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Cqrs;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
+using R2;
 
 namespace LinkExtractor.Instagram
 {

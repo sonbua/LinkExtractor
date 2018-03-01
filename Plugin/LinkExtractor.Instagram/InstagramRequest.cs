@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Cqrs.Aspect.Caching;
+using R2.Aspect.Caching;
 
 namespace LinkExtractor.Instagram
 {

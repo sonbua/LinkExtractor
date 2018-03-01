@@ -1,4 +1,4 @@
-﻿using Cqrs;
+﻿using R2;
 
 namespace LinkExtractor.Instagram
 {

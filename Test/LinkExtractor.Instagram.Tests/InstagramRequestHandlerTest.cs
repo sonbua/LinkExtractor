@@ -3,9 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Cqrs;
-using Cqrs.DependencyRegistration.Autofac;
 using LinkExtractor.Instagram.DependencyRegistration;
+using R2;
+using R2.DependencyRegistration.Autofac;
 using Xunit;
 
 namespace LinkExtractor.Instagram.Tests
@@ -21,7 +21,7 @@ namespace LinkExtractor.Instagram.Tests
 
             builder.RegisterType<AutofacServiceProvider>().As<IServiceProvider>();
 
-            builder.RegisterModule<CoreModule>()
+            builder.RegisterModule<R2Module>()
                 .RegisterModule<InstagramModule>();
 
             _container = builder.Build();

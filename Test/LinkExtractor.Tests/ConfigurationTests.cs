@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Cqrs;
-using Cqrs.Aspect.Preprocessing;
-using Cqrs.Aspect.Validation;
-using Cqrs.DependencyRegistration.Autofac;
 using LinkExtractor.Instagram.DependencyRegistration;
+using R2;
+using R2.Aspect.Preprocessing;
+using R2.Aspect.Validation;
+using R2.DependencyRegistration.Autofac;
 using Xunit;
 
 namespace LinkExtractor.Tests
@@ -22,7 +22,7 @@ namespace LinkExtractor.Tests
                 .As<IServiceProvider>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterModule<CoreModule>()
+            builder.RegisterModule<R2Module>()
                 .RegisterModule<InstagramModule>();
 
             _container = builder.Build();

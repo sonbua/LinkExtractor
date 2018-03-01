@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Cqrs;
+using R2;
 
 namespace LinkExtractor.Instagram
 {
