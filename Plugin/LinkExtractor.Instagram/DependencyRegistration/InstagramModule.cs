@@ -69,6 +69,27 @@ namespace LinkExtractor.Instagram.DependencyRegistration
                     decoratedServiceType: typeof(IRequestHandler<,>),
                     fromKey: "requestPostprocessing")
                 .InstancePerLifetimeScope();
+
+            builder
+                .RegisterAssemblyTypes(thisAssembly)
+                .AsClosedTypesOf(
+                    openGenericServiceType: typeof(ICommandHandler<>),
+                    serviceKey: "commandHandler")
+                .As<ICommandHandler>()
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterGenericDecorator(
+                    decoratorType: typeof(CommandValidationDecorator<>),
+                    decoratedServiceType: typeof(ICommandHandler<>),
+                    fromKey: "commandHandler",
+                    toKey: "commandValidation")
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterGenericDecorator(
+                    decoratorType: typeof(CommandPreprocessingDecorator<>),
+                    decoratedServiceType: typeof(ICommandHandler<>),
+                    fromKey: "commandValidation")
+                .InstancePerLifetimeScope();
         }
     }
 }

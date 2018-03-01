@@ -9,5 +9,9 @@ namespace Cqrs
             where TResponse : IResponse<TRequest>;
 
         Task<object> ProcessAsync(object request, Type requestHandlerType);
+
+        Task ProcessCommandAsync<TCommand>(TCommand command);
+
+        Task ProcessCommandAsync(object command);
     }
 }

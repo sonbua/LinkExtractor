@@ -27,5 +27,20 @@ namespace Cqrs
 
             return await requestHandler.HandleAsync(request);
         }
+
+        public async Task ProcessCommandAsync<TCommand>(TCommand command)
+        {
+            var requestHandler = _serviceProvider.GetService<ICommandHandler<TCommand>>();
+
+            await requestHandler.HandleAsync(command);
+        }
+
+        public async Task ProcessCommandAsync(object command)
+        {
+            var commandHandlerType = typeof(ICommandHandler<>).MakeGenericType(command.GetType());
+            var requestHandler = (IRequestHandler) _serviceProvider.GetService(commandHandlerType);
+
+            await requestHandler.HandleAsync(command);
+        }
     }
 }
