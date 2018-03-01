@@ -2,6 +2,7 @@
 using Autofac;
 using Cqrs;
 using Cqrs.Aspect.Caching;
+using Cqrs.Aspect.Postprocessing;
 using Cqrs.Aspect.Preprocessing;
 using Cqrs.Aspect.Validation;
 using Cqrs.DependencyRegistration;
@@ -57,9 +58,16 @@ namespace LinkExtractor.Instagram.DependencyRegistration
                 .InstancePerLifetimeScope();
             builder
                 .RegisterGenericDecorator(
+                    decoratorType: typeof(RequestPostprocessingDecorator<,>),
+                    decoratedServiceType: typeof(IRequestHandler<,>),
+                    fromKey: "requestPreprocessing",
+                    toKey: "requestPostprocessing")
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterGenericDecorator(
                     decoratorType: typeof(RequestCachingDecorator<,>),
                     decoratedServiceType: typeof(IRequestHandler<,>),
-                    fromKey: "requestPreprocessing")
+                    fromKey: "requestPostprocessing")
                 .InstancePerLifetimeScope();
         }
     }
