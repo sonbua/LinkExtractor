@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Autofac;
+﻿using Autofac;
 using R2;
 using R2.Aspect.Caching;
 using R2.Aspect.Postprocessing;
@@ -14,29 +13,27 @@ namespace LinkExtractor.Instagram.DependencyRegistration
     {
         protected override void Load(ContainerBuilder builder)
         {
-            var thisAssembly = Assembly.GetExecutingAssembly();
-
             builder
-                .RegisterAssemblyTypes(thisAssembly)
+                .RegisterAssemblyTypes(ThisAssembly)
                 .AsClosedTypesOf(typeof(IPreprocessor<>))
                 .As<IPreprocessor>()
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterAssemblyTypes(thisAssembly)
+                .RegisterAssemblyTypes(ThisAssembly)
                 .AsClosedTypesOf(typeof(IValidator<>))
                 .As<IValidator>()
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterAssemblyTypes(thisAssembly)
+                .RegisterAssemblyTypes(ThisAssembly)
                 .BasedOn(typeof(IValidationRule<>))
                 .AsSelf()
                 .As<IValidationRule>()
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterAssemblyTypes(thisAssembly)
+                .RegisterAssemblyTypes(ThisAssembly)
                 .AsClosedTypesOf(
                     openGenericServiceType: typeof(IRequestHandler<,>),
                     serviceKey: "requestHandler")
@@ -71,7 +68,7 @@ namespace LinkExtractor.Instagram.DependencyRegistration
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterAssemblyTypes(thisAssembly)
+                .RegisterAssemblyTypes(ThisAssembly)
                 .AsClosedTypesOf(
                     openGenericServiceType: typeof(ICommandHandler<>),
                     serviceKey: "commandHandler")
