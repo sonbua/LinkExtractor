@@ -7,7 +7,7 @@ using R2;
 
 namespace LinkExtractor.Instagram
 {
-    public class InstagramRequestHandler : BaseRequestHandler<InstagramRequest, InstagramResponse>
+    public class InstagramRequestHandler : RequestHandler<InstagramRequest, InstagramResponse>
     {
         private const string _WINDOW_SHARED_DATA_VARIABLE_KEY = "window._sharedData = ";
 

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace R2.Aspect.Preprocessing
 {
-    public class RequestPreprocessingDecorator<TRequest, TResponse> : BaseRequestHandler<TRequest, TResponse>
+    public class RequestPreprocessingDecorator<TRequest, TResponse> : RequestHandler<TRequest, TResponse>
         where TResponse : IResponse<TRequest>
     {
         private readonly IEnumerable<IPreprocessor<TRequest>> _preprocessors;

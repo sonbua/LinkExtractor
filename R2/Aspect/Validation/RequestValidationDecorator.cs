@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace R2.Aspect.Validation
 {
-    public class RequestValidationDecorator<TRequest, TResponse> : BaseRequestHandler<TRequest, TResponse>
+    public class RequestValidationDecorator<TRequest, TResponse> : RequestHandler<TRequest, TResponse>
         where TResponse : IResponse<TRequest>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;

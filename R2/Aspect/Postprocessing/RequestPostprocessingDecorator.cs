@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace R2.Aspect.Postprocessing
 {
-    public class RequestPostprocessingDecorator<TRequest, TResponse> : BaseRequestHandler<TRequest, TResponse>
+    public class RequestPostprocessingDecorator<TRequest, TResponse> : RequestHandler<TRequest, TResponse>
         where TResponse : IResponse<TRequest>
     {
         private readonly IRequestHandler<TRequest, TResponse> _inner;

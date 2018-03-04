@@ -2,8 +2,8 @@
 
 namespace R2
 {
-    public abstract class BaseCommandHandler<TCommand>
-        : BaseRequestHandler<TCommand, Nothing<TCommand>>,
+    public abstract class CommandHandler<TCommand>
+        : RequestHandler<TCommand, Nothing<TCommand>>,
             ICommandHandler<TCommand>
     {
         public override async Task<Nothing<TCommand>> HandleAsync(TCommand request)

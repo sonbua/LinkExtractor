@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace R2.Aspect.Caching
 {
-    public class RequestCachingDecorator<TRequest, TResponse> : BaseRequestHandler<TRequest, TResponse>
+    public class RequestCachingDecorator<TRequest, TResponse> : RequestHandler<TRequest, TResponse>
         where TResponse : IResponse<TRequest>
     {
         private readonly IRequestHandler<TRequest, TResponse> _inner;

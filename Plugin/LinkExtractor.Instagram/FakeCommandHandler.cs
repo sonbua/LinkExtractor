@@ -3,7 +3,7 @@ using R2;
 
 namespace LinkExtractor.Instagram
 {
-    public class FakeCommandHandler : BaseCommandHandler<FakeCommand>
+    public class FakeCommandHandler : CommandHandler<FakeCommand>
     {
         protected override Task HandleCommandAsync(FakeCommand command)
         {
