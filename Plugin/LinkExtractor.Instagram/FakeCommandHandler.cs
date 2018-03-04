@@ -5,11 +5,11 @@ namespace LinkExtractor.Instagram
 {
     public class FakeCommandHandler : BaseCommandHandler<FakeCommand>
     {
-        public override Task<Nothing<FakeCommand>> HandleAsync(FakeCommand request)
+        protected override Task HandleCommandAsync(FakeCommand command)
         {
             // do something fake here
 
-            return Task.FromResult(Nothing<FakeCommand>.Instance);
+            return Task.CompletedTask;
         }
     }
 }
