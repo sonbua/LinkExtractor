@@ -88,9 +88,8 @@ namespace LinkExtractor.Instagram.Tests
             Assert.NotEmpty(response.Media[0].DisplayResources);
         }
 
-        [Theory]
-        [InlineData("https://www.instagram.com/p/BfUtyjyhgCK/")]
-        public async Task GivenAFakeCommand_ReturnsNothing(string url)
+        [Fact]
+        public async Task GivenAFakeCommand_ReturnsNothing()
         {
             // arrange
             object command = new FakeCommand();
