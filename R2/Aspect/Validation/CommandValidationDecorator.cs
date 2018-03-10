@@ -3,8 +3,9 @@
 namespace R2.Aspect.Validation
 {
     public class CommandValidationDecorator<TCommand>
-        : RequestValidationDecorator<TCommand, Nothing<TCommand>>,
+        : RequestValidationDecorator<TCommand, VoidReturn>,
             ICommandHandler<TCommand>
+        where TCommand : ICommand
     {
         public CommandValidationDecorator(
             IEnumerable<IValidator<TCommand>> validators,

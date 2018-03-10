@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace R2.Aspect.Preprocessing
 {
     public class RequestPreprocessingDecorator<TRequest, TResponse> : RequestHandler<TRequest, TResponse>
-        where TResponse : IResponse<TRequest>
+        where TRequest : IRequest<TResponse>
     {
         private readonly IEnumerable<IPreprocessor<TRequest>> _preprocessors;
         private readonly IRequestHandler<TRequest, TResponse> _inner;

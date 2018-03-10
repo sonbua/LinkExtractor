@@ -8,7 +8,7 @@ namespace R2
     }
 
     public interface IRequestHandler<TRequest, TResponse> : IRequestHandler
-        where TResponse : IResponse<TRequest>
+        where TRequest : IRequest<TResponse>
     {
         Task<TResponse> HandleAsync(TRequest request);
     }

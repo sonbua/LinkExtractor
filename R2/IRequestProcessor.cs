@@ -5,12 +5,13 @@ namespace R2
 {
     public interface IRequestProcessor
     {
-        Task<TResponse> ProcessAsync<TRequest, TResponse>(TRequest request)
-            where TResponse : IResponse<TRequest>;
+        Task<TResult> ProcessQueryAsync<TQuery, TResult>(TQuery query)
+            where TQuery : IQuery<TResult>;
 
-        Task<object> ProcessAsync(object request, Type requestHandlerType);
+        Task<object> ProcessQueryAsync(object query, Type queryHandlerType);
 
-        Task ProcessCommandAsync<TCommand>(TCommand command);
+        Task ProcessCommandAsync<TCommand>(TCommand command)
+            where TCommand : ICommand;
 
         Task ProcessCommandAsync(object command);
     }

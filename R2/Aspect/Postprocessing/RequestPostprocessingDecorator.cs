@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 namespace R2.Aspect.Postprocessing
 {
     public class RequestPostprocessingDecorator<TRequest, TResponse> : RequestHandler<TRequest, TResponse>
-        where TResponse : IResponse<TRequest>
+        where TRequest : IRequest<TResponse>
     {
         private readonly IRequestHandler<TRequest, TResponse> _inner;
         private readonly IEnumerable<IPostprocessor<TRequest, TResponse>> _postprocessors;
 
-        public RequestPostprocessingDecorator(IRequestHandler<TRequest, TResponse> inner,
+        public RequestPostprocessingDecorator(
+            IRequestHandler<TRequest, TResponse> inner,
             IEnumerable<IPostprocessor<TRequest, TResponse>> postprocessors)
         {
             _inner = inner;

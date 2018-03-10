@@ -7,15 +7,15 @@ using Newtonsoft.Json;
 namespace R2.Aspect.Caching
 {
     public class RequestCachingDecorator<TRequest, TResponse> : RequestHandler<TRequest, TResponse>
-        where TResponse : IResponse<TRequest>
+        where TRequest : IRequest<TResponse>
     {
-        private readonly IRequestHandler<TRequest, TResponse> _inner;
         private readonly MemoryCache _memoryCache;
+        private readonly IRequestHandler<TRequest, TResponse> _inner;
 
-        public RequestCachingDecorator(IRequestHandler<TRequest, TResponse> inner, MemoryCache memoryCache)
+        public RequestCachingDecorator(MemoryCache memoryCache, IRequestHandler<TRequest, TResponse> inner)
         {
-            _inner = inner;
             _memoryCache = memoryCache;
+            _inner = inner;
         }
 
         public override async Task<TResponse> HandleAsync(TRequest request)

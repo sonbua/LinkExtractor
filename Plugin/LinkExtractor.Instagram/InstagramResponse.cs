@@ -1,8 +1,6 @@
-﻿using R2;
-
-namespace LinkExtractor.Instagram
+﻿namespace LinkExtractor.Instagram
 {
-    public class InstagramResponse : IResponse<InstagramRequest>
+    public class InstagramResponse
     {
         public Medium[] Media { get; set; }
 

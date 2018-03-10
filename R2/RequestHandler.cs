@@ -3,7 +3,7 @@
 namespace R2
 {
     public abstract class RequestHandler<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
-        where TResponse : IResponse<TRequest>
+        where TRequest : IRequest<TResponse>
     {
         public abstract Task<TResponse> HandleAsync(TRequest request);
 

@@ -3,14 +3,15 @@
 namespace R2
 {
     public abstract class CommandHandler<TCommand>
-        : RequestHandler<TCommand, Nothing<TCommand>>,
+        : RequestHandler<TCommand, VoidReturn>,
             ICommandHandler<TCommand>
+        where TCommand : ICommand
     {
-        public override async Task<Nothing<TCommand>> HandleAsync(TCommand request)
+        public override async Task<VoidReturn> HandleAsync(TCommand command)
         {
-            await HandleCommandAsync(request);
+            await HandleCommandAsync(command);
 
-            return Nothing<TCommand>.Instance;
+            return VoidReturn.Instance;
         }
 
         protected abstract Task HandleCommandAsync(TCommand command);

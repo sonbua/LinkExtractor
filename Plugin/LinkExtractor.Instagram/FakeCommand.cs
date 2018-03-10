@@ -1,6 +1,8 @@
-﻿namespace LinkExtractor.Instagram
+﻿using R2;
+
+namespace LinkExtractor.Instagram
 {
-    public class FakeCommand
+    public class FakeCommand : ICommand
     {
     }
 }

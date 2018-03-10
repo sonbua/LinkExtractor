@@ -13,34 +13,35 @@ namespace R2
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<TResponse> ProcessAsync<TRequest, TResponse>(TRequest request)
-            where TResponse : IResponse<TRequest>
+        public async Task<TResult> ProcessQueryAsync<TQuery, TResult>(TQuery query)
+            where TQuery : IQuery<TResult>
         {
-            var requestHandler = _serviceProvider.GetService<IRequestHandler<TRequest, TResponse>>();
+            var queryHandler = _serviceProvider.GetService<IRequestHandler<TQuery, TResult>>();
 
-            return await requestHandler.HandleAsync(request);
+            return await queryHandler.HandleAsync(query);
         }
 
-        public async Task<object> ProcessAsync(object request, Type requestHandlerType)
+        public async Task<object> ProcessQueryAsync(object query, Type queryHandlerType)
         {
-            var requestHandler = (IRequestHandler) _serviceProvider.GetService(requestHandlerType);
+            var queryHandler = (IRequestHandler) _serviceProvider.GetService(queryHandlerType);
 
-            return await requestHandler.HandleAsync(request);
+            return await queryHandler.HandleAsync(query);
         }
 
         public async Task ProcessCommandAsync<TCommand>(TCommand command)
+            where TCommand : ICommand
         {
-            var requestHandler = _serviceProvider.GetService<ICommandHandler<TCommand>>();
+            var commandHandler = _serviceProvider.GetService<ICommandHandler<TCommand>>();
 
-            await requestHandler.HandleAsync(command);
+            await commandHandler.HandleAsync(command);
         }
 
         public async Task ProcessCommandAsync(object command)
         {
             var commandHandlerType = typeof(ICommandHandler<>).MakeGenericType(command.GetType());
-            var requestHandler = (IRequestHandler) _serviceProvider.GetService(commandHandlerType);
+            var commandHandler = (IRequestHandler) _serviceProvider.GetService(commandHandlerType);
 
-            await requestHandler.HandleAsync(command);
+            await commandHandler.HandleAsync(command);
         }
     }
 }
