@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R2.Aspect.Preprocessing", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R2.Aspect.Postprocessing", "R2.Aspect.Postprocessing\R2.Aspect.Postprocessing.csproj", "{F4CEEE2A-C66F-45CC-B02C-EF763D9D42F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R2.Aspect.Validation.Tests", "R2.Aspect.Validation.Tests\R2.Aspect.Validation.Tests.csproj", "{AC437BFA-99E9-4A62-B305-00B9828E3F0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{F4CEEE2A-C66F-45CC-B02C-EF763D9D42F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4CEEE2A-C66F-45CC-B02C-EF763D9D42F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4CEEE2A-C66F-45CC-B02C-EF763D9D42F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC437BFA-99E9-4A62-B305-00B9828E3F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC437BFA-99E9-4A62-B305-00B9828E3F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC437BFA-99E9-4A62-B305-00B9828E3F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC437BFA-99E9-4A62-B305-00B9828E3F0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5BE92DA9-4C90-4E81-95C9-3B0A7D20BDEF} = {279CCB5C-D03C-449D-87A0-390B42D247A4}
