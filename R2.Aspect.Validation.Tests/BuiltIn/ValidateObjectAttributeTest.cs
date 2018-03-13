@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using R2.Aspect.Validation.BuiltIn;
@@ -6,24 +6,25 @@ using Xunit;
 
 namespace R2.Aspect.Validation.Tests.BuiltIn
 {
-    public class DataAnnotationValidationMustPassRuleTest
+    public class ValidateObjectAttributeTest
     {
         [Fact]
-        public async Task Test()
+        public void RequiredPropertyThatIsNull_ReturnsInvalid()
         {
             // arrange
-            var rule = new DataAnnotationValidationMustPassRule<HasNestedObjectToValidateCommand>();
-
             var command = new HasNestedObjectToValidateCommand
             {
                 NestedObject = new NestedType()
             };
 
+            var context = new ValidationContext(command);
+            var results = new List<ValidationResult>();
+
             // act
-            var testDelegate = new Func<Task>(async () => await rule.TestAsync(command));
+            var isValid = Validator.TryValidateObject(command, context, results, validateAllProperties: true);
 
             // assert
-            await Assert.ThrowsAsync<CompositeValidationException>(testDelegate);
+            Assert.False(isValid);
         }
     }
 
