@@ -17,7 +17,10 @@ namespace R2.Aspect.Validation.BuiltIn
 
             if (!(value is IEnumerable enumerable))
             {
-                return new ValidationResult($"This property {validationContext.DisplayName} is not enumerable.");
+                return new ValidationResult(
+                    $"This property {validationContext.DisplayName} is not enumerable.",
+                    new[] {validationContext.MemberName}
+                );
             }
 
             var results = new List<ValidationResult>();

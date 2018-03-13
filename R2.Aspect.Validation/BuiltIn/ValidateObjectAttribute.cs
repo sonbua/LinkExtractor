@@ -18,12 +18,9 @@ namespace R2.Aspect.Validation.BuiltIn
 
             var isValid = Validator.TryValidateObject(value, context, results, validateAllProperties: true);
 
-            if (isValid)
-            {
-                return ValidationResult.Success;
-            }
-
-            return new CompositeValidationResult(results);
+            return isValid
+                ? ValidationResult.Success
+                : new CompositeValidationResult(results);
         }
     }
 }
