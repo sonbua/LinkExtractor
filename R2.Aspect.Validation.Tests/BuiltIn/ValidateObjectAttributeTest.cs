@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 using R2.Aspect.Validation.BuiltIn;
 using Xunit;
 
@@ -12,7 +11,7 @@ namespace R2.Aspect.Validation.Tests.BuiltIn
         public void RequiredPropertyThatIsNull_ReturnsInvalid()
         {
             // arrange
-            var command = new HasNestedObjectToValidateCommand
+            var command = new ValidateNestedObjectCommand
             {
                 NestedObject = new NestedType()
             };
@@ -26,17 +25,17 @@ namespace R2.Aspect.Validation.Tests.BuiltIn
             // assert
             Assert.False(isValid);
         }
-    }
 
-    public class HasNestedObjectToValidateCommand
-    {
-        [ValidateObject]
-        public NestedType NestedObject { get; set; }
-    }
+        private class ValidateNestedObjectCommand
+        {
+            [ValidateObject]
+            public NestedType NestedObject { get; set; }
+        }
 
-    public class NestedType
-    {
-        [Required]
-        public string RequiredProp { get; set; }
+        private class NestedType
+        {
+            [Required]
+            public string RequiredProp { get; set; }
+        }
     }
 }
