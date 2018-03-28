@@ -16,6 +16,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Plugin\LinkExtractor.Instagram.DependencyRegistration.Autofac\LinkExtractor.Instagram.DependencyRegistration.Autofac.csproj" />
     <ProjectReference Include="..\..\Plugin\LinkExtractor.Instagram\LinkExtractor.Instagram.csproj" />
   </ItemGroup>
 </Project>

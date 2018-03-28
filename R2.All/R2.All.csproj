@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\R2.Aspect.Caching\R2.Aspect.Caching.csproj" />
+    <ProjectReference Include="..\R2.Aspect.Postprocessing\R2.Aspect.Postprocessing.csproj" />
+    <ProjectReference Include="..\R2.Aspect.Preprocessing\R2.Aspect.Preprocessing.csproj" />
+    <ProjectReference Include="..\R2.Aspect.Validation\R2.Aspect.Validation.csproj" />
+  </ItemGroup>
+</Project>

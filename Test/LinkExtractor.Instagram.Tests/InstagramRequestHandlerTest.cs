@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using LinkExtractor.Instagram.DependencyRegistration;
+using LinkExtractor.Instagram.DependencyRegistration.Autofac;
 using R2;
 using R2.DependencyRegistration.Autofac;
 using Xunit;

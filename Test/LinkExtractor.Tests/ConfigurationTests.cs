@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using LinkExtractor.Instagram.DependencyRegistration;
+using LinkExtractor.Instagram.DependencyRegistration.Autofac;
 using R2;
 using R2.Aspect.Preprocessing;
 using R2.Aspect.Validation;

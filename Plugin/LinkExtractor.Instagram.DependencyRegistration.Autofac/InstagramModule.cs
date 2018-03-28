@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Reflection;
+using Autofac;
 using R2;
 using R2.Aspect.Caching;
 using R2.Aspect.Postprocessing;
@@ -7,33 +8,35 @@ using R2.Aspect.Validation;
 using R2.DependencyRegistration.Autofac;
 using Module = Autofac.Module;
 
-namespace LinkExtractor.Instagram.DependencyRegistration
+namespace LinkExtractor.Instagram.DependencyRegistration.Autofac
 {
     public class InstagramModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
+            var targetAssembly = Assembly.GetAssembly(typeof(InstagramRequest));
+
             builder
-                .RegisterAssemblyTypes(ThisAssembly)
+                .RegisterAssemblyTypes(targetAssembly)
                 .AsClosedTypesOf(typeof(IPreprocessor<>))
                 .As<IPreprocessor>()
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterAssemblyTypes(ThisAssembly)
+                .RegisterAssemblyTypes(targetAssembly)
                 .AsClosedTypesOf(typeof(IValidator<>))
                 .As<IValidator>()
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterAssemblyTypes(ThisAssembly)
+                .RegisterAssemblyTypes(targetAssembly)
                 .BasedOn(typeof(IValidationRule<>))
                 .AsSelf()
                 .As<IValidationRule>()
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterAssemblyTypes(ThisAssembly)
+                .RegisterAssemblyTypes(targetAssembly)
                 .AsClosedTypesOf(
                     openGenericServiceType: typeof(IRequestHandler<,>),
                     serviceKey: "requestHandler")
@@ -68,7 +71,7 @@ namespace LinkExtractor.Instagram.DependencyRegistration
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterAssemblyTypes(ThisAssembly)
+                .RegisterAssemblyTypes(targetAssembly)
                 .AsClosedTypesOf(
                     openGenericServiceType: typeof(ICommandHandler<>),
                     serviceKey: "commandHandler")

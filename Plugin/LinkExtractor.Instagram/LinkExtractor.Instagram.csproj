@@ -9,10 +9,13 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\R2.DependencyRegistration.Autofac\R2.DependencyRegistration.Autofac.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.6.17" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DependencyRegistration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\R2.All\R2.All.csproj" />
   </ItemGroup>
 </Project>

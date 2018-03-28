@@ -9,13 +9,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\R2.Aspect.Caching\R2.Aspect.Caching.csproj" />
-    <ProjectReference Include="..\R2.Aspect.Postprocessing\R2.Aspect.Postprocessing.csproj" />
-    <ProjectReference Include="..\R2.Aspect.Preprocessing\R2.Aspect.Preprocessing.csproj" />
-    <ProjectReference Include="..\R2.Aspect.Validation\R2.Aspect.Validation.csproj" />
-    <ProjectReference Include="..\R2\R2.csproj" />
+    <PackageReference Include="Autofac" Version="4.6.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.6.2" />
+    <ProjectReference Include="..\R2.All\R2.All.csproj" />
   </ItemGroup>
 </Project>
