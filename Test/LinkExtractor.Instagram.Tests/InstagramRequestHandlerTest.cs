@@ -87,19 +87,5 @@ namespace LinkExtractor.Instagram.Tests
             Assert.NotEmpty(response.Media[0].VideoUrl);
             Assert.NotEmpty(response.Media[0].DisplayResources);
         }
-
-        [Fact]
-        public async Task GivenAFakeCommand_ReturnsNothing()
-        {
-            // arrange
-            object command = new FakeCommand();
-            var processor = _scope.Resolve<IRequestProcessor>();
-
-            // act
-            //await processor.ProcessCommandAsync(command);
-            await processor.ProcessCommandAsync(command);
-
-            // assert
-        }
     }
 }
