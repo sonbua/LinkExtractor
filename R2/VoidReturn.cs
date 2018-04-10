@@ -3,5 +3,9 @@
     public sealed class VoidReturn
     {
         public static readonly VoidReturn Instance = new VoidReturn();
+
+        private VoidReturn()
+        {
+        }
     }
 }
