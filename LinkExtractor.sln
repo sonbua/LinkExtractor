@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R2.Routing.DefaultHandler.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R2.Routing.AspNetCore.DependencyRegistration.Autofac", "R2.Routing.AspNetCore.DependencyRegistration.Autofac\R2.Routing.AspNetCore.DependencyRegistration.Autofac.csproj", "{32E143C3-9EE7-4F5D-96C0-1C3C50E2DD9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R2.Query.Pagination", "R2.Query.Pagination\R2.Query.Pagination.csproj", "{6FA15659-990F-4E01-8A38-6BAAF36BC0FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,6 +126,10 @@ Global
 		{32E143C3-9EE7-4F5D-96C0-1C3C50E2DD9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32E143C3-9EE7-4F5D-96C0-1C3C50E2DD9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32E143C3-9EE7-4F5D-96C0-1C3C50E2DD9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FA15659-990F-4E01-8A38-6BAAF36BC0FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA15659-990F-4E01-8A38-6BAAF36BC0FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FA15659-990F-4E01-8A38-6BAAF36BC0FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FA15659-990F-4E01-8A38-6BAAF36BC0FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5BE92DA9-4C90-4E81-95C9-3B0A7D20BDEF} = {279CCB5C-D03C-449D-87A0-390B42D247A4}
