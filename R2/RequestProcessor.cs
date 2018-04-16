@@ -36,9 +36,8 @@ namespace R2
             await commandHandler.HandleAsync(command);
         }
 
-        public async Task ProcessCommandAsync(object command)
+        public async Task ProcessCommandAsync(object command, Type commandHandlerType)
         {
-            var commandHandlerType = typeof(ICommandHandler<>).MakeGenericType(command.GetType());
             var commandHandler = (IRequestHandler) _serviceProvider.GetService(commandHandlerType);
 
             await commandHandler.HandleAsync(command);

@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\R2.DependencyRegistration.Autofac\R2.DependencyRegistration.Autofac.csproj" />
+    <ProjectReference Include="..\R2.Routing.DefaultHandler\R2.Routing.DefaultHandler.csproj" />
+  </ItemGroup>
+</Project>

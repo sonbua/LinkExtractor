@@ -13,6 +13,6 @@ namespace R2
         Task ProcessCommandAsync<TCommand>(TCommand command)
             where TCommand : ICommand;
 
-        Task ProcessCommandAsync(object command);
+        Task ProcessCommandAsync(object command, Type commandHandlerType);
     }
 }
