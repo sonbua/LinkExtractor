@@ -42,33 +42,6 @@ namespace LinkExtractor.Instagram.DependencyRegistration.Autofac
                     serviceKey: "requestHandler")
                 .As<IRequestHandler>()
                 .InstancePerLifetimeScope();
-            builder
-                .RegisterGenericDecorator(
-                    decoratorType: typeof(RequestValidationDecorator<,>),
-                    decoratedServiceType: typeof(IRequestHandler<,>),
-                    fromKey: "requestHandler",
-                    toKey: "requestValidation")
-                .InstancePerLifetimeScope();
-            builder
-                .RegisterGenericDecorator(
-                    decoratorType: typeof(RequestPreprocessingDecorator<,>),
-                    decoratedServiceType: typeof(IRequestHandler<,>),
-                    fromKey: "requestValidation",
-                    toKey: "requestPreprocessing")
-                .InstancePerLifetimeScope();
-            builder
-                .RegisterGenericDecorator(
-                    decoratorType: typeof(RequestPostprocessingDecorator<,>),
-                    decoratedServiceType: typeof(IRequestHandler<,>),
-                    fromKey: "requestPreprocessing",
-                    toKey: "requestPostprocessing")
-                .InstancePerLifetimeScope();
-            builder
-                .RegisterGenericDecorator(
-                    decoratorType: typeof(RequestCachingDecorator<,>),
-                    decoratedServiceType: typeof(IRequestHandler<,>),
-                    fromKey: "requestPostprocessing")
-                .InstancePerLifetimeScope();
 
             builder
                 .RegisterAssemblyTypes(targetAssembly)
@@ -76,19 +49,6 @@ namespace LinkExtractor.Instagram.DependencyRegistration.Autofac
                     openGenericServiceType: typeof(ICommandHandler<>),
                     serviceKey: "commandHandler")
                 .As<ICommandHandler>()
-                .InstancePerLifetimeScope();
-            builder
-                .RegisterGenericDecorator(
-                    decoratorType: typeof(CommandValidationDecorator<>),
-                    decoratedServiceType: typeof(ICommandHandler<>),
-                    fromKey: "commandHandler",
-                    toKey: "commandValidation")
-                .InstancePerLifetimeScope();
-            builder
-                .RegisterGenericDecorator(
-                    decoratorType: typeof(CommandPreprocessingDecorator<>),
-                    decoratedServiceType: typeof(ICommandHandler<>),
-                    fromKey: "commandValidation")
                 .InstancePerLifetimeScope();
         }
     }

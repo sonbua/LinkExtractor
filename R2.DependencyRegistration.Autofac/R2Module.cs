@@ -6,6 +6,8 @@ using System.Runtime.Caching;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Features.Scanning;
+using R2.Aspect.Caching;
+using R2.Aspect.Postprocessing;
 using R2.Aspect.Preprocessing;
 using R2.Aspect.Preprocessing.BuiltIn;
 using R2.Aspect.Validation;
@@ -43,6 +45,48 @@ namespace R2.DependencyRegistration.Autofac
             builder
                 .RegisterGeneric(typeof(DataAnnotationValidationMustPassRule<>))
                 .SingleInstance();
+
+            builder
+                .RegisterGenericDecorator(
+                    decoratorType: typeof(RequestValidationDecorator<,>),
+                    decoratedServiceType: typeof(IRequestHandler<,>),
+                    fromKey: "requestHandler",
+                    toKey: "requestValidation")
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterGenericDecorator(
+                    decoratorType: typeof(RequestPreprocessingDecorator<,>),
+                    decoratedServiceType: typeof(IRequestHandler<,>),
+                    fromKey: "requestValidation",
+                    toKey: "requestPreprocessing")
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterGenericDecorator(
+                    decoratorType: typeof(RequestPostprocessingDecorator<,>),
+                    decoratedServiceType: typeof(IRequestHandler<,>),
+                    fromKey: "requestPreprocessing",
+                    toKey: "requestPostprocessing")
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterGenericDecorator(
+                    decoratorType: typeof(RequestCachingDecorator<,>),
+                    decoratedServiceType: typeof(IRequestHandler<,>),
+                    fromKey: "requestPostprocessing")
+                .InstancePerLifetimeScope();
+
+            builder
+                .RegisterGenericDecorator(
+                    decoratorType: typeof(CommandValidationDecorator<>),
+                    decoratedServiceType: typeof(ICommandHandler<>),
+                    fromKey: "commandHandler",
+                    toKey: "commandValidation")
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterGenericDecorator(
+                    decoratorType: typeof(CommandPreprocessingDecorator<>),
+                    decoratedServiceType: typeof(ICommandHandler<>),
+                    fromKey: "commandValidation")
+                .InstancePerLifetimeScope();
         }
     }
 
