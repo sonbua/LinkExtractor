@@ -16,7 +16,7 @@ namespace R2
         public async Task<TResult> ProcessQueryAsync<TQuery, TResult>(TQuery query)
             where TQuery : IQuery<TResult>
         {
-            var queryHandler = _serviceProvider.GetService<IRequestHandler<TQuery, TResult>>();
+            var queryHandler = _serviceProvider.GetService<IQueryHandler<TQuery, TResult>>();
 
             return await queryHandler.HandleAsync(query);
         }

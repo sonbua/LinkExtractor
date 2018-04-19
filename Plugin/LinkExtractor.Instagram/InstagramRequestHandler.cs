@@ -7,15 +7,15 @@ using R2;
 
 namespace LinkExtractor.Instagram
 {
-    public class InstagramRequestHandler : RequestHandler<InstagramRequest, InstagramResponse>
+    public class InstagramRequestHandler : QueryHandler<InstagramRequest, InstagramResponse>
     {
         private const string _WINDOW_SHARED_DATA_VARIABLE_KEY = "window._sharedData = ";
 
-        public override async Task<InstagramResponse> HandleAsync(InstagramRequest request)
+        protected override async Task<InstagramResponse> HandleQueryAsync(InstagramRequest query)
         {
             var htmlWeb = new HtmlWeb();
 
-            var htmlDocument = await htmlWeb.LoadFromWebAsync(request.Url);
+            var htmlDocument = await htmlWeb.LoadFromWebAsync(query.Url);
 
             var sharedDataScript =
                 htmlDocument

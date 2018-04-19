@@ -36,9 +36,9 @@ namespace LinkExtractor.Instagram.DependencyRegistration.Autofac
             builder
                 .RegisterAssemblyTypes(targetAssembly)
                 .AsClosedTypesOf(
-                    openGenericServiceType: typeof(IRequestHandler<,>),
-                    serviceKey: "requestHandler")
-                .As<IRequestHandler>()
+                    openGenericServiceType: typeof(IQueryHandler<,>),
+                    serviceKey: "queryHandler")
+                .As<IQueryHandler>()
                 .InstancePerLifetimeScope();
 
             builder
