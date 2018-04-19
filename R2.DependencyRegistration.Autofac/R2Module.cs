@@ -87,6 +87,11 @@ namespace R2.DependencyRegistration.Autofac
                     decoratedServiceType: typeof(ICommandHandler<>),
                     fromKey: "commandValidation")
                 .InstancePerLifetimeScope();
+
+            builder
+                .RegisterType<RequestContext>()
+                .As<IRequestContext>()
+                .InstancePerLifetimeScope();
         }
     }
 
