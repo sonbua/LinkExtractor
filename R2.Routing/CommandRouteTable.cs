@@ -24,7 +24,6 @@ namespace R2.Routing
             var routeEntries =
                 from component in _commandComponents
                 let componentType = component.GetType()
-                where componentType.Name.EndsWith("Command")
                 from routePath in _routeHandler.Handle(componentType)
                 select new RouteEntry
                 {

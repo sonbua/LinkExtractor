@@ -24,7 +24,6 @@ namespace R2.Routing
             var routeEntries =
                 from component in _queryComponents
                 let componentType = component.GetType()
-                where componentType.Name.EndsWith("Query")
                 let serviceType = componentType.GetInterfaces().Single(
                     i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IQuery<>)
                 )
