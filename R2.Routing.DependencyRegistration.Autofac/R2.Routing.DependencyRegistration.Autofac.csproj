@@ -9,7 +9,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.6.2" />
+    <PackageReference Include="Autofac" Version="4.8.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\R2.Routing\R2.Routing.csproj" />

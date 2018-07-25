@@ -24,7 +24,7 @@ namespace R2.Aspect.Validation.Tests.BuiltIn
 
             // assert
             Assert.False(isValid);
-            Assert.Equal(1, results.Count);
+            Assert.Single(results);
         }
 
         [Fact]
