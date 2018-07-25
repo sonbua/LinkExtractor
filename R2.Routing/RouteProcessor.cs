@@ -21,7 +21,7 @@ namespace R2.Routing
 
         public async Task ProcessCommandAsync(string commandName, string commandObjectString)
         {
-            var routeEntry = _commandRouteTable.Table[commandName];
+            var routeEntry = _commandRouteTable.Table[commandName.ToLower()];
             var commandObject = JsonConvert.DeserializeObject(commandObjectString, routeEntry.RequestType);
 
             await _requestProcessor.ProcessCommandAsync(commandObject, routeEntry.HandlerType);
@@ -29,7 +29,7 @@ namespace R2.Routing
 
         public async Task<object> ProcessQueryAsync(string queryName, string queryObjectString)
         {
-            var routeEntry = _queryRouteTable.Table[queryName];
+            var routeEntry = _queryRouteTable.Table[queryName.ToLower()];
             var queryObject = JsonConvert.DeserializeObject(queryObjectString, routeEntry.RequestType);
 
             return await _requestProcessor.ProcessQueryAsync(queryObject, routeEntry.HandlerType);

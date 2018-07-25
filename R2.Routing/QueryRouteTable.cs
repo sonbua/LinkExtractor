@@ -32,7 +32,7 @@ namespace R2.Routing
                 from routePath in _routeHandler.Handle(componentType)
                 select new RouteEntry
                 {
-                    RoutePath = routePath,
+                    RoutePath = routePath.ToLower(),
                     RequestType = componentType,
                     HandlerType = handlerType
                 };
