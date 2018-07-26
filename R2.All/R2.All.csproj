@@ -2,6 +2,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+    <PackageVersion>0.1.0</PackageVersion>
+    <Authors>sonbua</Authors>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
@@ -9,9 +13,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\R2.Aspect.Caching\R2.Aspect.Caching.csproj" />
-    <ProjectReference Include="..\R2.Aspect.Postprocessing\R2.Aspect.Postprocessing.csproj" />
-    <ProjectReference Include="..\R2.Aspect.Preprocessing\R2.Aspect.Preprocessing.csproj" />
-    <ProjectReference Include="..\R2.Aspect.Validation\R2.Aspect.Validation.csproj" />
+    <PackageReference Include="R2.Aspect.Caching" Version="0.1.0" />
+    <PackageReference Include="R2.Aspect.Postprocessing" Version="0.1.0" />
+    <PackageReference Include="R2.Aspect.Preprocessing" Version="0.1.0" />
+    <PackageReference Include="R2.Aspect.Validation" Version="0.1.0" />
   </ItemGroup>
 </Project>
