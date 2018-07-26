@@ -18,5 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Plugin\LinkExtractor.Instagram.DependencyRegistration.Autofac\LinkExtractor.Instagram.DependencyRegistration.Autofac.csproj" />
     <ProjectReference Include="..\..\Plugin\LinkExtractor.Instagram\LinkExtractor.Instagram.csproj" />
+    <ProjectReference Include="..\..\R2.DependencyRegistration.Autofac\R2.DependencyRegistration.Autofac.csproj" />
   </ItemGroup>
 </Project>

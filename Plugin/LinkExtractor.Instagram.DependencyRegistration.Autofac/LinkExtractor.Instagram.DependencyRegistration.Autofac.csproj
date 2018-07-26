@@ -7,7 +7,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\R2.All\R2.All.csproj" />
-    <ProjectReference Include="..\..\R2.DependencyRegistration.Autofac\R2.DependencyRegistration.Autofac.csproj" />
+    <ProjectReference Include="..\..\R2.DependencyRegistration.Autofac.Extensions\R2.DependencyRegistration.Autofac.Extensions.csproj" />
     <ProjectReference Include="..\LinkExtractor.Instagram\LinkExtractor.Instagram.csproj" />
   </ItemGroup>
 </Project>

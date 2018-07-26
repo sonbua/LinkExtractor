@@ -3,7 +3,7 @@ using Autofac;
 using R2;
 using R2.Aspect.Preprocessing;
 using R2.Aspect.Validation;
-using R2.DependencyRegistration.Autofac;
+using R2.DependencyRegistration.Autofac.Extensions;
 using Module = Autofac.Module;
 
 namespace LinkExtractor.Instagram.DependencyRegistration.Autofac
