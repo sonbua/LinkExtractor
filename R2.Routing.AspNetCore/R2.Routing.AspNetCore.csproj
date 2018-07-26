@@ -2,6 +2,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+    <PackageVersion>0.1.0</PackageVersion>
+    <Authors>sonbua</Authors>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
@@ -9,6 +13,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\R2.Routing\R2.Routing.csproj" />
+    <PackageReference Include="R2.Routing" Version="0.1.0" />
   </ItemGroup>
 </Project>
