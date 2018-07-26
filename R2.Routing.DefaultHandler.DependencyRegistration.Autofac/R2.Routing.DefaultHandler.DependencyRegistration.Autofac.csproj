@@ -2,6 +2,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+    <PackageVersion>0.1.0</PackageVersion>
+    <Authors>sonbua</Authors>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
@@ -10,9 +14,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\R2.DependencyRegistration.Autofac\R2.DependencyRegistration.Autofac.csproj" />
-    <ProjectReference Include="..\R2.Routing.DefaultHandler\R2.Routing.DefaultHandler.csproj" />
+    <PackageReference Include="R2.DependencyRegistration.Autofac" Version="0.1.0" />
+    <PackageReference Include="R2.Routing.DefaultHandler" Version="0.1.0" />
   </ItemGroup>
 </Project>
