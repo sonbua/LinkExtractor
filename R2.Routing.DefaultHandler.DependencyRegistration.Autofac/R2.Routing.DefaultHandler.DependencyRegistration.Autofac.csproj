@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup>
-    <PackageVersion>0.1.0</PackageVersion>
+    <PackageVersion>0.1.1</PackageVersion>
     <Authors>sonbua</Authors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -14,7 +14,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="R2.DependencyRegistration.Autofac" Version="0.1.0" />
+    <PackageReference Include="R2.DependencyRegistration.Autofac.Extensions" Version="0.1.0" />
     <PackageReference Include="R2.Routing.DefaultHandler" Version="0.1.0" />
   </ItemGroup>
 </Project>

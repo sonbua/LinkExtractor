@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using Autofac;
-using R2.DependencyRegistration.Autofac;
+using R2.DependencyRegistration.Autofac.Extensions;
 using Module = Autofac.Module;
 
 namespace R2.Routing.DefaultHandler.DependencyRegistration.Autofac
