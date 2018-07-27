@@ -12,12 +12,12 @@
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="R2.DependencyRegistration.Autofac" Version="0.1.2" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Plugin\LinkExtractor.Instagram.DependencyRegistration.Autofac\LinkExtractor.Instagram.DependencyRegistration.Autofac.csproj" />
     <ProjectReference Include="..\..\Plugin\LinkExtractor.Instagram\LinkExtractor.Instagram.csproj" />
-    <ProjectReference Include="..\..\R2.DependencyRegistration.Autofac\R2.DependencyRegistration.Autofac.csproj" />
   </ItemGroup>
 </Project>
