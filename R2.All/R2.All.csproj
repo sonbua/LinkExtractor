@@ -16,6 +16,6 @@
     <PackageReference Include="R2.Aspect.Caching" Version="0.1.0" />
     <PackageReference Include="R2.Aspect.Postprocessing" Version="0.1.0" />
     <PackageReference Include="R2.Aspect.Preprocessing" Version="0.1.1" />
-    <PackageReference Include="R2.Aspect.Validation" Version="0.1.0" />
+    <PackageReference Include="R2.Aspect.Validation" Version="0.1.1" />
   </ItemGroup>
 </Project>
