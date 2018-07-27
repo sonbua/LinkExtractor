@@ -3,8 +3,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup>
-    <PackageVersion>0.1.0</PackageVersion>
-    <Authors>sonbua</Authors>
+    <PackageVersion>0.1.1</PackageVersion>
+    <Authors>Son Dinh Nguyen</Authors>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -15,6 +16,6 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="R2" Version="0.1.1" />
-    <PackageReference Include="ResponsibilityChain" Version="0.1.0" />
+    <PackageReference Include="ResponsibilityChain" Version="0.1.1" />
   </ItemGroup>
 </Project>
