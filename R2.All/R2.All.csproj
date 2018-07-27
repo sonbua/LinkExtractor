@@ -3,8 +3,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup>
-    <PackageVersion>0.1.0</PackageVersion>
-    <Authors>sonbua</Authors>
+    <PackageVersion>0.1.1</PackageVersion>
+    <Authors>Son Dinh Nguyen</Authors>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -13,8 +14,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="R2.Aspect.Caching" Version="0.1.0" />
-    <PackageReference Include="R2.Aspect.Postprocessing" Version="0.1.0" />
+    <PackageReference Include="R2.Aspect.Caching" Version="0.1.1" />
+    <PackageReference Include="R2.Aspect.Postprocessing" Version="0.1.1" />
     <PackageReference Include="R2.Aspect.Preprocessing" Version="0.1.1" />
     <PackageReference Include="R2.Aspect.Validation" Version="0.1.1" />
   </ItemGroup>
