@@ -3,6 +3,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Brick.IO</AssemblyName>
     <RootNamespace>Brick.IO</RootNamespace>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageVersion>0.1.0</PackageVersion>
+    <Authors>Son Dinh Nguyen</Authors>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Brick.IO\Brick.IO.csproj" />
