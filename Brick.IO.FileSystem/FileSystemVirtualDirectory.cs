@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,7 +21,7 @@ namespace Brick.IO
         public override string Name => BackingDirectoryInfo.Name;
 
         public override string RealPath => BackingDirectoryInfo.FullName;
-        
+
         public override DateTime LastModified => BackingDirectoryInfo.LastWriteTimeUtc;
 
         public override IEnumerable<IVirtualFile> Files =>
@@ -51,7 +51,7 @@ namespace Brick.IO
 
             return fileInfo != null
                 ? new FileSystemVirtualFile(VirtualPathProvider, this, fileInfo)
-                : null;
+                : NullVirtualFile.Instance;
         }
 
         protected override IVirtualDirectory GetDirectoryFromBackingDirectoryOrDefault(string directoryName)
