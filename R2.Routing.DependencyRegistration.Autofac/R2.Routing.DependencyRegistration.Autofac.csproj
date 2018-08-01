@@ -4,12 +4,14 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
-    <PackageVersion>0.1.1</PackageVersion>
+    <PackageVersion>0.1.2</PackageVersion>
     <Authors>Son Dinh Nguyen</Authors>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="R2.Routing" Version="0.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\R2.Routing\R2.Routing.csproj" />
   </ItemGroup>
 </Project>

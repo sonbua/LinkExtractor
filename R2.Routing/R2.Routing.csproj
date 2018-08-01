@@ -4,13 +4,15 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
-    <PackageVersion>0.1.1</PackageVersion>
+    <PackageVersion>0.1.2</PackageVersion>
     <Authors>Son Dinh Nguyen</Authors>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="R2" Version="0.1.1" />
-    <PackageReference Include="ResponsibilityChain" Version="0.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\R2\R2.csproj" />
+    <ProjectReference Include="..\ResponsibilityChain\ResponsibilityChain.csproj" />
   </ItemGroup>
 </Project>

@@ -4,13 +4,15 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
-    <PackageVersion>0.1.2</PackageVersion>
+    <PackageVersion>0.1.3</PackageVersion>
     <Authors>Son Dinh Nguyen</Authors>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="R2.DependencyRegistration.Autofac.Extensions" Version="0.1.1" />
-    <PackageReference Include="R2.Routing.DefaultHandler" Version="0.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\R2.DependencyRegistration.Autofac.Extensions\R2.DependencyRegistration.Autofac.Extensions.csproj" />
+    <ProjectReference Include="..\R2.Routing.DefaultHandler\R2.Routing.DefaultHandler.csproj" />
   </ItemGroup>
 </Project>
