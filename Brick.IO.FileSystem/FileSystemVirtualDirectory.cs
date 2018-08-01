@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
 namespace Brick.IO
 {
-    public class FileSystemVirtualDirectory : VirtualDirectory
+    internal class FileSystemVirtualDirectory : VirtualDirectory
     {
         protected DirectoryInfo BackingDirectoryInfo;
 

@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Brick.IO
 {
-    public class FileSystemVirtualFile : VirtualFile
+    internal class FileSystemVirtualFile : VirtualFile
     {
         protected FileInfo BackingFileInfo;
 
