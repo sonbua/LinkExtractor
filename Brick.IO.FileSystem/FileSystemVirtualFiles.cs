@@ -44,13 +44,13 @@ namespace Brick.IO
         public override bool FileExists(string virtualPath) =>
             File.Exists(RootDirectory.RealPath.CombineWith(SanitizePath(virtualPath)));
 
-        public void WriteFile(string filePath, string contents)
+        public void WriteFile(string filePath, string textContents)
         {
             var realFilePath = RootDirectory.RealPath.CombineWith(filePath);
 
             EnsureDirectory(Path.GetDirectoryName(realFilePath));
 
-            File.WriteAllText(realFilePath, contents);
+            File.WriteAllText(realFilePath, textContents);
         }
 
         public void WriteFile(string filePath, Stream stream)

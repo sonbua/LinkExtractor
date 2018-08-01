@@ -6,7 +6,7 @@ namespace Brick.IO
 {
     public interface IVirtualFiles : IVirtualPathProvider
     {
-        void WriteFile(string filePath, string contents);
+        void WriteFile(string filePath, string textContents);
 
         void WriteFile(string filePath, Stream stream);
 
