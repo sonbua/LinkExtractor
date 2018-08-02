@@ -7,5 +7,7 @@ namespace R2.Routing
         Task ProcessCommandAsync(string commandName, string commandObjectString);
 
         Task<object> ProcessQueryAsync(string queryName, string queryObjectString);
+
+        Task<object> ProcessFileAsync(string uploadName, IFile file);
     }
 }

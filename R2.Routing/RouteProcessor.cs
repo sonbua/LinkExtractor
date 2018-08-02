@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace R2.Routing
@@ -33,6 +34,16 @@ namespace R2.Routing
             var queryObject = JsonConvert.DeserializeObject(queryObjectString, routeEntry.RequestType);
 
             return await _requestProcessor.ProcessQueryAsync(queryObject, routeEntry.HandlerType);
+        }
+
+        public async Task<object> ProcessFileAsync(string uploadName, IFile file)
+        {
+            var routeEntry = _queryRouteTable.Table[uploadName.ToLower()];
+            var uploadObject = Activator.CreateInstance(routeEntry.RequestType);
+
+            RequestUtils.AttachFileToObject(uploadObject, file);
+
+            return await _requestProcessor.ProcessQueryAsync(uploadObject, routeEntry.HandlerType);
         }
     }
 }
