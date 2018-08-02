@@ -20,6 +20,12 @@ namespace R2
         Stream OpenReadStream();
 
         /// <summary>
+        /// Copies the contents of the uploaded file to the <paramref name="target" /> stream.
+        /// </summary>
+        /// <param name="target">The stream to copy the file contents to.</param>
+        void CopyTo(Stream target);
+
+        /// <summary>
         /// Asynchronously copies the contents of the uploaded file to the <paramref name="target" /> stream.
         /// </summary>
         /// <param name="target">The stream to copy the file contents to.</param>

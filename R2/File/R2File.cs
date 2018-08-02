@@ -39,6 +39,16 @@ namespace R2
             return _stream;
         }
 
+        public void CopyTo(Stream target)
+        {
+            if (target == null)
+            {
+                throw new ArgumentNullException(nameof(target));
+            }
+
+            OpenReadStream().CopyTo(target, DefaultBufferSize);
+        }
+
         public async Task CopyToAsync(Stream target, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (target == null)
