@@ -15,7 +15,7 @@ namespace R2
         {
         }
 
-        private R2File(Stream stream, string name, string fileName, string contentType)
+        public R2File(Stream stream, string name, string fileName, string contentType)
         {
             _stream = stream;
             Name = name;
@@ -24,7 +24,7 @@ namespace R2
             ContentType = contentType;
         }
 
-        public string ContentType { get; set; }
+        public string ContentType { get; }
 
         public long Length { get; }
 
