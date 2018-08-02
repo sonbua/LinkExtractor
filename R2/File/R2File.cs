@@ -32,7 +32,12 @@ namespace R2
 
         public string FileName { get; }
 
-        public Stream OpenReadStream() => _stream;
+        public Stream OpenReadStream()
+        {
+            _stream.Position = 0;
+
+            return _stream;
+        }
 
         public async Task CopyToAsync(Stream target, CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -41,7 +46,7 @@ namespace R2
                 throw new ArgumentNullException(nameof(target));
             }
 
-            await _stream.CopyToAsync(target, DefaultBufferSize, cancellationToken);
+            await OpenReadStream().CopyToAsync(target, DefaultBufferSize, cancellationToken);
         }
     }
 }
