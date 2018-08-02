@@ -14,6 +14,16 @@ namespace R2
 
         string FileName { get; }
 
+        /// <summary>
+        /// Opens the request stream for reading the uploaded file.
+        /// </summary>
+        Stream OpenReadStream();
+
+        /// <summary>
+        /// Asynchronously copies the contents of the uploaded file to the <paramref name="target" /> stream.
+        /// </summary>
+        /// <param name="target">The stream to copy the file contents to.</param>
+        /// <param name="cancellationToken"></param>
         Task CopyToAsync(Stream target, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

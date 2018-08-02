@@ -24,13 +24,15 @@ namespace R2
             ContentType = contentType;
         }
 
-        public string ContentType { get; }
+        public string ContentType { get; set; }
 
         public long Length { get; }
 
         public string Name { get; }
 
         public string FileName { get; }
+
+        public Stream OpenReadStream() => _stream;
 
         public async Task CopyToAsync(Stream target, CancellationToken cancellationToken = default(CancellationToken))
         {
