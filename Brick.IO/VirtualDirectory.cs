@@ -68,6 +68,7 @@ namespace Brick.IO
         public virtual IVirtualDirectory GetDirectory(string virtualPath)
         {
             var tokens = virtualPath.TokenizeVirtualPath(VirtualPathProvider);
+
             return GetDirectory(tokens);
         }
 

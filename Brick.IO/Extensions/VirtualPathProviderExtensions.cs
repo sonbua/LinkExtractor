@@ -11,33 +11,27 @@ namespace Brick.IO
         public static void CopyFrom(
             this IVirtualPathProvider pathProvider,
             IEnumerable<IVirtualFile> sourceFiles,
-            Func<IVirtualFile, string> toPathFunc)
+            Func<IVirtualFile, string> destinationPathSelector)
         {
             foreach (var file in sourceFiles)
             {
                 using (var stream = file.OpenRead())
                 {
-                    var destinationPath = toPathFunc(file);
-                    
-                    if (destinationPath == null)
-                    {
-                        continue;
-                    }
+                    var destinationPath = destinationPathSelector(file);
 
                     pathProvider.WriteFile(destinationPath, stream);
                 }
             }
         }
-        public static void CopyFrom(
-            this IVirtualPathProvider pathProvider,
-            IEnumerable<IVirtualFile> sourceFiles)
+
+        public static void CopyFrom(this IVirtualPathProvider pathProvider, IEnumerable<IVirtualFile> sourceFiles)
         {
             foreach (var file in sourceFiles)
             {
                 using (var stream = file.OpenRead())
                 {
                     var destinationPath = file.VirtualPath;
-                    
+
                     if (destinationPath == null)
                     {
                         continue;
@@ -52,7 +46,9 @@ namespace Brick.IO
         {
             if (!(pathProvider is IVirtualFiles writableFiles))
             {
-                throw new InvalidOperationException(string.Format(NotWritableErrorMessage, pathProvider.GetType().Name));
+                throw new InvalidOperationException(
+                    string.Format(NotWritableErrorMessage, pathProvider.GetType().Name)
+                );
             }
 
             writableFiles.WriteFile(filePath, stream);

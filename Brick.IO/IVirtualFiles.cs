@@ -10,7 +10,9 @@ namespace Brick.IO
 
         void WriteFile(string filePath, Stream stream);
 
-        void WriteFiles(IEnumerable<IVirtualFile> files, Func<IVirtualFile, string> toPath = null);
+        void WriteFiles(IEnumerable<IVirtualFile> files);
+
+        void WriteFiles(IEnumerable<IVirtualFile> files, Func<IVirtualFile, string> destinationPathSelector);
 
         void AppendFile(string filePath, string textContents);
 

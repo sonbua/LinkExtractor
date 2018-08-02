@@ -35,11 +35,8 @@ namespace Brick.IO
 
         public override string RealPathSeparator => Convert.ToString(Path.DirectorySeparatorChar);
 
-        public override bool DirectoryExists(string virtualPath)
-        {
-            var isDirectory = Directory.Exists(RootDirectory.RealPath.CombineWith(SanitizePath(virtualPath)));
-            return isDirectory;
-        }
+        public override bool DirectoryExists(string virtualPath) =>
+            Directory.Exists(RootDirectory.RealPath.CombineWith(SanitizePath(virtualPath)));
 
         public override bool FileExists(string virtualPath) =>
             File.Exists(RootDirectory.RealPath.CombineWith(SanitizePath(virtualPath)));
@@ -62,9 +59,14 @@ namespace Brick.IO
             File.WriteAllBytes(realFilePath, stream.ReadFully());
         }
 
-        public void WriteFiles(IEnumerable<IVirtualFile> files, Func<IVirtualFile, string> toPath = null)
+        public void WriteFiles(IEnumerable<IVirtualFile> files)
         {
-            this.CopyFrom(files, toPath);
+            this.CopyFrom(files);
+        }
+
+        public void WriteFiles(IEnumerable<IVirtualFile> files, Func<IVirtualFile, string> destinationPathSelector)
+        {
+            this.CopyFrom(files, destinationPathSelector);
         }
 
         public void AppendFile(string filePath, string textContents)
