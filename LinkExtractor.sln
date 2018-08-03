@@ -1,14 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkExtractor.Tests", "Test\LinkExtractor.Tests\LinkExtractor.Tests.csproj", "{F6B5BCB7-2F34-4EA7-A043-D8F8B1BE6180}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugin", "Plugin", "{279CCB5C-D03C-449D-87A0-390B42D247A4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Instagram", "Instagram", "{5BE92DA9-4C90-4E81-95C9-3B0A7D20BDEF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkExtractor.Instagram", "Plugin\LinkExtractor.Instagram\LinkExtractor.Instagram.csproj", "{76114B0A-38EC-4AFB-8E93-65DE67E64CF9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkExtractor.Instagram.Tests", "Test\LinkExtractor.Instagram.Tests\LinkExtractor.Instagram.Tests.csproj", "{08956770-8014-47B7-B5A0-1928EB8E905F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R2", "R2\R2.csproj", "{EB9344F6-D220-47CA-B6FF-33C9D9A0820B}"
 EndProject
@@ -23,8 +17,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R2.Aspect.Postprocessing", "R2.Aspect.Postprocessing\R2.Aspect.Postprocessing.csproj", "{F4CEEE2A-C66F-45CC-B02C-EF763D9D42F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R2.Aspect.Validation.Tests", "R2.Aspect.Validation.Tests\R2.Aspect.Validation.Tests.csproj", "{AC437BFA-99E9-4A62-B305-00B9828E3F0F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkExtractor.Instagram.DependencyRegistration.Autofac", "Plugin\LinkExtractor.Instagram.DependencyRegistration.Autofac\LinkExtractor.Instagram.DependencyRegistration.Autofac.csproj", "{EF2EFFD4-DA74-40BE-8861-F810111A93A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R2.All", "R2.All\R2.All.csproj", "{3A7176B2-787A-4607-92F1-4317304BC403}"
 EndProject
@@ -52,24 +44,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brick.IO", "Brick.IO\Brick.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brick.IO.FileSystem", "Brick.IO.FileSystem\Brick.IO.FileSystem.csproj", "{4E4874F8-3AD7-488F-8C77-31972DF3585F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkExtractor.Instagram", "LinkExtractor.Instagram\LinkExtractor.Instagram.csproj", "{9E4BAAA1-CBC0-4F0A-B3D0-7E89E0EAD172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkExtractor.Instagram.DependencyRegistration.Autofac", "LinkExtractor.Instagram.DependencyRegistration.Autofac\LinkExtractor.Instagram.DependencyRegistration.Autofac.csproj", "{17EBBE33-AA27-41F4-85FD-B5B6051F83A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkExtractor.Instagram.Tests", "LinkExtractor.Instagram.Tests\LinkExtractor.Instagram.Tests.csproj", "{67E85C33-CC57-43D1-9782-4CAF2103D717}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkExtractor.Tests", "LinkExtractor.Tests\LinkExtractor.Tests.csproj", "{F89AE8FF-1661-4D6B-807D-3DCD208B47C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F6B5BCB7-2F34-4EA7-A043-D8F8B1BE6180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6B5BCB7-2F34-4EA7-A043-D8F8B1BE6180}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6B5BCB7-2F34-4EA7-A043-D8F8B1BE6180}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6B5BCB7-2F34-4EA7-A043-D8F8B1BE6180}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76114B0A-38EC-4AFB-8E93-65DE67E64CF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76114B0A-38EC-4AFB-8E93-65DE67E64CF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76114B0A-38EC-4AFB-8E93-65DE67E64CF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76114B0A-38EC-4AFB-8E93-65DE67E64CF9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{08956770-8014-47B7-B5A0-1928EB8E905F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{08956770-8014-47B7-B5A0-1928EB8E905F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{08956770-8014-47B7-B5A0-1928EB8E905F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{08956770-8014-47B7-B5A0-1928EB8E905F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB9344F6-D220-47CA-B6FF-33C9D9A0820B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EB9344F6-D220-47CA-B6FF-33C9D9A0820B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB9344F6-D220-47CA-B6FF-33C9D9A0820B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -98,10 +86,6 @@ Global
 		{AC437BFA-99E9-4A62-B305-00B9828E3F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC437BFA-99E9-4A62-B305-00B9828E3F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC437BFA-99E9-4A62-B305-00B9828E3F0F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF2EFFD4-DA74-40BE-8861-F810111A93A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF2EFFD4-DA74-40BE-8861-F810111A93A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF2EFFD4-DA74-40BE-8861-F810111A93A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF2EFFD4-DA74-40BE-8861-F810111A93A3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3A7176B2-787A-4607-92F1-4317304BC403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3A7176B2-787A-4607-92F1-4317304BC403}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A7176B2-787A-4607-92F1-4317304BC403}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -150,12 +134,25 @@ Global
 		{4E4874F8-3AD7-488F-8C77-31972DF3585F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E4874F8-3AD7-488F-8C77-31972DF3585F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E4874F8-3AD7-488F-8C77-31972DF3585F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E4BAAA1-CBC0-4F0A-B3D0-7E89E0EAD172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E4BAAA1-CBC0-4F0A-B3D0-7E89E0EAD172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E4BAAA1-CBC0-4F0A-B3D0-7E89E0EAD172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E4BAAA1-CBC0-4F0A-B3D0-7E89E0EAD172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17EBBE33-AA27-41F4-85FD-B5B6051F83A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17EBBE33-AA27-41F4-85FD-B5B6051F83A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17EBBE33-AA27-41F4-85FD-B5B6051F83A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17EBBE33-AA27-41F4-85FD-B5B6051F83A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67E85C33-CC57-43D1-9782-4CAF2103D717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67E85C33-CC57-43D1-9782-4CAF2103D717}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67E85C33-CC57-43D1-9782-4CAF2103D717}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67E85C33-CC57-43D1-9782-4CAF2103D717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F89AE8FF-1661-4D6B-807D-3DCD208B47C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F89AE8FF-1661-4D6B-807D-3DCD208B47C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F89AE8FF-1661-4D6B-807D-3DCD208B47C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F89AE8FF-1661-4D6B-807D-3DCD208B47C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5BE92DA9-4C90-4E81-95C9-3B0A7D20BDEF} = {279CCB5C-D03C-449D-87A0-390B42D247A4}
-		{76114B0A-38EC-4AFB-8E93-65DE67E64CF9} = {5BE92DA9-4C90-4E81-95C9-3B0A7D20BDEF}
-		{08956770-8014-47B7-B5A0-1928EB8E905F} = {5BE92DA9-4C90-4E81-95C9-3B0A7D20BDEF}
-		{EF2EFFD4-DA74-40BE-8861-F810111A93A3} = {5BE92DA9-4C90-4E81-95C9-3B0A7D20BDEF}
 		{EB9344F6-D220-47CA-B6FF-33C9D9A0820B} = {EB00A0E5-75C3-4E8D-83AF-90B15EA47B81}
 		{3A7176B2-787A-4607-92F1-4317304BC403} = {EB00A0E5-75C3-4E8D-83AF-90B15EA47B81}
 		{CE65163D-706B-4840-A771-C74EBA6A343C} = {EB00A0E5-75C3-4E8D-83AF-90B15EA47B81}
@@ -175,5 +172,8 @@ Global
 		{D8FE010E-C224-448F-8470-9BB38C7B0B77} = {EB00A0E5-75C3-4E8D-83AF-90B15EA47B81}
 		{B11105BE-2C08-4C05-BD12-BC8466737274} = {EB00A0E5-75C3-4E8D-83AF-90B15EA47B81}
 		{4E4874F8-3AD7-488F-8C77-31972DF3585F} = {EB00A0E5-75C3-4E8D-83AF-90B15EA47B81}
+		{9E4BAAA1-CBC0-4F0A-B3D0-7E89E0EAD172} = {5BE92DA9-4C90-4E81-95C9-3B0A7D20BDEF}
+		{17EBBE33-AA27-41F4-85FD-B5B6051F83A3} = {5BE92DA9-4C90-4E81-95C9-3B0A7D20BDEF}
+		{67E85C33-CC57-43D1-9782-4CAF2103D717} = {5BE92DA9-4C90-4E81-95C9-3B0A7D20BDEF}
 	EndGlobalSection
 EndGlobal
