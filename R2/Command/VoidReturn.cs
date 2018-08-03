@@ -2,10 +2,14 @@
 {
     public sealed class VoidReturn
     {
-        public static readonly VoidReturn Instance = new VoidReturn();
+        static VoidReturn()
+        {
+        }
 
         private VoidReturn()
         {
         }
+
+        public static VoidReturn Instance { get; } = new VoidReturn();
     }
 }
