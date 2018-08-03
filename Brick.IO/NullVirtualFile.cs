@@ -5,11 +5,15 @@ namespace Brick.IO
 {
     public sealed class NullVirtualFile : IVirtualFile
     {
+        static NullVirtualFile()
+        {
+        }
+
         private NullVirtualFile()
         {
         }
 
-        public static IVirtualFile Instance => Nested._instance;
+        public static IVirtualFile Instance { get; } = new NullVirtualFile();
 
         public IVirtualDirectory Directory => throw new NotSupportedException();
 
@@ -38,15 +42,5 @@ namespace Brick.IO
         public string ReadAllText() => throw new NotSupportedException();
 
         public void Refresh() => throw new NotSupportedException();
-
-        private class Nested
-        {
-            internal static readonly NullVirtualFile _instance = new NullVirtualFile();
-
-            // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
-            static Nested()
-            {
-            }
-        }
     }
 }
