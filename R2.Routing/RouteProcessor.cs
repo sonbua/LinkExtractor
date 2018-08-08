@@ -9,16 +9,19 @@ namespace R2.Routing
     {
         private readonly CommandRouteTable _commandRouteTable;
         private readonly QueryRouteTable _queryRouteTable;
+        private readonly UploadRouteTable _uploadRouteTable;
         private readonly IRequestProcessor _requestProcessor;
 
         public RouteProcessor(
-            IRequestProcessor requestProcessor,
             CommandRouteTable commandRouteTable,
-            QueryRouteTable queryRouteTable)
+            QueryRouteTable queryRouteTable,
+            UploadRouteTable uploadRouteTable,
+            IRequestProcessor requestProcessor)
         {
-            _requestProcessor = requestProcessor;
             _commandRouteTable = commandRouteTable;
             _queryRouteTable = queryRouteTable;
+            _uploadRouteTable = uploadRouteTable;
+            _requestProcessor = requestProcessor;
         }
 
         public async Task ProcessCommandAsync(string commandName, string commandObjectString)
@@ -39,12 +42,12 @@ namespace R2.Routing
 
         public async Task<object> ProcessUploadAsync(string uploadName, IList<IFile> files)
         {
-            var routeEntry = _queryRouteTable.Table[uploadName.ToLower()];
-            var uploadObject = Activator.CreateInstance(routeEntry.RequestType);
+            var routeEntry = _uploadRouteTable.Table[uploadName.ToLower()];
+            var uploadObject = (IUpload) Activator.CreateInstance(routeEntry.RequestType);
 
-            RequestUtils.AttachFileToObject(uploadObject, files);
+            RequestUtils.AttachFilesToRequestObject(uploadObject, files);
 
-            return await _requestProcessor.ProcessQueryAsync(uploadObject, routeEntry.HandlerType);
+            return await _requestProcessor.ProcessUpload(uploadObject, routeEntry.HandlerType);
         }
     }
 }
