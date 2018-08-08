@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace R2.Routing
 {
@@ -8,6 +9,6 @@ namespace R2.Routing
 
         Task<object> ProcessQueryAsync(string queryName, string queryObjectString);
 
-        Task<object> ProcessFileAsync(string uploadName, IFile file);
+        Task<object> ProcessUploadAsync(string uploadName, IList<IFile> files);
     }
 }

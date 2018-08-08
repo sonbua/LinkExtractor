@@ -14,5 +14,7 @@ namespace R2
             where TCommand : ICommand;
 
         Task ProcessCommandAsync(object command, Type commandHandlerType);
+
+        Task<object> ProcessUpload(object upload, Type uploadHandlerType);
     }
 }

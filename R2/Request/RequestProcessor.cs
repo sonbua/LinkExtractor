@@ -42,5 +42,12 @@ namespace R2
 
             await commandHandler.HandleAsync(command);
         }
+
+        public async Task<object> ProcessUpload(object upload, Type uploadHandlerType)
+        {
+            var uploadHandler = (IRequestHandler) _serviceProvider.GetService(uploadHandlerType);
+
+            return await uploadHandler.HandleAsync(upload);
+        }
     }
 }
