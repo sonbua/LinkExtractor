@@ -11,7 +11,7 @@ namespace LinkExtractor.Instagram
     {
         private const string _WINDOW_SHARED_DATA_VARIABLE_KEY = "window._sharedData = ";
 
-        protected override async Task<InstagramResponse> HandleQueryAsync(InstagramRequest query)
+        public override async Task<InstagramResponse> HandleAsync(InstagramRequest query)
         {
             var htmlWeb = new HtmlWeb();
 
