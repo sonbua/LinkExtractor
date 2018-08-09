@@ -7,9 +7,7 @@ namespace R2
     {
         public abstract Task<TResponse> HandleAsync(TRequest request);
 
-        public async Task<object> HandleAsync(object request)
-        {
-            return await HandleAsync((TRequest) request);
-        }
+        public async Task<object> HandleAsync(object request) =>
+            await HandleAsync((TRequest) request);
     }
 }
