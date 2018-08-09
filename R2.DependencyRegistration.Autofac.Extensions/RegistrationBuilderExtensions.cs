@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using Autofac;
 using Autofac.Builder;
 using Autofac.Features.Scanning;
 
@@ -9,6 +8,18 @@ namespace R2.DependencyRegistration.Autofac.Extensions
 {
     public static class RegistrationBuilderExtensions
     {
+        /// <summary>
+        /// Why bother creating this method while Autofac.RegistrationExtensions.AsClosedTypesOf extension method has been provided?
+        /// AsClosedTypesOf method deals with open generic service types only.
+        /// This <see cref="BasedOn{TLimit,TScanningActivatorData,TRegistrationStyle}"/> method deals with both open and closed types.
+        /// </summary>
+        /// <param name="registration"></param>
+        /// <param name="baseType"></param>
+        /// <typeparam name="TLimit"></typeparam>
+        /// <typeparam name="TScanningActivatorData"></typeparam>
+        /// <typeparam name="TRegistrationStyle"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static IRegistrationBuilder<TLimit, TScanningActivatorData, TRegistrationStyle>
             BasedOn<TLimit, TScanningActivatorData, TRegistrationStyle>(
                 this IRegistrationBuilder<TLimit, TScanningActivatorData, TRegistrationStyle> registration,
@@ -25,56 +36,21 @@ namespace R2.DependencyRegistration.Autofac.Extensions
                 throw new ArgumentNullException(nameof(baseType));
             }
 
-            if (!baseType.IsGenericTypeDefinition)
+            if (baseType.GetTypeInfo().IsGenericTypeDefinition)
             {
-                registration.ActivatorData.Filters.Add(type => baseType.IsAssignableFrom(type));
+                registration.ActivatorData.Filters.Add(type => type.IsClosedTypeOf(baseType));
 
                 return registration;
             }
 
-            registration
-                .ActivatorData
-                .Filters
-                .Add(IsClosedTypeOf(baseType));
+            registration.ActivatorData.Filters.Add(IsAssignableTo(baseType));
 
             return registration;
         }
 
-        private static Func<Type, bool> IsClosedTypeOf(Type openGenericType)
+        private static Func<Type, bool> IsAssignableTo(Type baseType)
         {
-            return
-                type =>
-                {
-                    if (type.IsGenericTypeDefinition)
-                    {
-                        return false;
-                    }
-
-                    return TypeExtensions.TypesAssignableFrom(type)
-                        .Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == openGenericType);
-                };
-        }
-    }
-
-    internal static class TypeExtensions
-    {
-        public static IEnumerable<Type> TypesAssignableFrom(Type type)
-        {
-            return
-                type.GetTypeInfo().ImplementedInterfaces
-                    .Concat(Traverse.Across(type, t => t.GetTypeInfo().BaseType));
-        }
-    }
-
-    internal static class Traverse
-    {
-        public static IEnumerable<T> Across<T>(T first, Func<T, T> next)
-            where T : class
-        {
-            for (var item = first; (object) item != null; item = next(item))
-            {
-                yield return item;
-            }
+            return type => baseType.GetTypeInfo().IsAssignableFrom(type.GetTypeInfo());
         }
     }
 }
