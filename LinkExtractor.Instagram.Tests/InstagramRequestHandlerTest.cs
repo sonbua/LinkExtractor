@@ -47,7 +47,7 @@ namespace LinkExtractor.Instagram.Tests
             var processor = _scope.Resolve<IRequestProcessor>();
 
             // act
-            var response = await processor.ProcessQueryAsync<InstagramRequest, InstagramResponse>(request);
+            var response = await processor.ProcessQueryAsync(request);
 
             // assert
             Assert.Single(response.Media);
@@ -63,7 +63,7 @@ namespace LinkExtractor.Instagram.Tests
             var processor = _scope.Resolve<IRequestProcessor>();
 
             // act
-            var response = await processor.ProcessQueryAsync<InstagramRequest, InstagramResponse>(request);
+            var response = await processor.ProcessQueryAsync(request);
 
             // assert
             Assert.NotEqual(expected: 1, actual: response.Media.Length);
@@ -79,7 +79,7 @@ namespace LinkExtractor.Instagram.Tests
             var processor = _scope.Resolve<IRequestProcessor>();
 
             // act
-            var response = await processor.ProcessQueryAsync<InstagramRequest, InstagramResponse>(request);
+            var response = await processor.ProcessQueryAsync(request);
 
             // assert
             Assert.Single(response.Media);

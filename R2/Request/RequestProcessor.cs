@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using R2.DependencyInjection;
 
@@ -13,12 +14,15 @@ namespace R2
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<TResult> ProcessQueryAsync<TQuery, TResult>(TQuery query)
-            where TQuery : IQuery<TResult>
+        public async Task<TResult> ProcessQueryAsync<TResult>(IQuery<TResult> query)
         {
-            var queryHandler = _serviceProvider.GetService<IQueryHandler<TQuery, TResult>>();
+            var queryHandlerType =
+                typeof(IQueryHandler<,>).GetTypeInfo()
+                    .MakeGenericType(query.GetType(), typeof(TResult));
 
-            return await queryHandler.HandleAsync(query);
+            var queryHandler = (IRequestHandler) _serviceProvider.GetService(queryHandlerType);
+
+            return (TResult) await queryHandler.HandleAsync(query);
         }
 
         public async Task<object> ProcessQueryAsync(object query, Type queryHandlerType)
