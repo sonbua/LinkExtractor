@@ -36,21 +36,22 @@ namespace R2.DependencyRegistration.Autofac.Extensions
                 throw new ArgumentNullException(nameof(baseType));
             }
 
-            if (baseType.GetTypeInfo().IsGenericTypeDefinition)
-            {
-                registration.ActivatorData.Filters.Add(type => type.IsClosedTypeOf(baseType));
+            var filter = TypesFilter(baseType);
 
-                return registration;
-            }
-
-            registration.ActivatorData.Filters.Add(IsAssignableTo(baseType));
+            registration.ActivatorData.Filters.Add(filter);
 
             return registration;
         }
 
-        private static Func<Type, bool> IsAssignableTo(Type baseType)
-        {
-            return type => baseType.GetTypeInfo().IsAssignableFrom(type.GetTypeInfo());
-        }
+        private static Func<Type, bool> TypesFilter(Type baseType) =>
+            baseType.GetTypeInfo().IsGenericTypeDefinition
+                ? IsClosedTypeOf(baseType)
+                : IsAssignableTo(baseType);
+
+        private static Func<Type, bool> IsClosedTypeOf(Type baseType) =>
+            type => type.IsClosedTypeOf(baseType);
+
+        private static Func<Type, bool> IsAssignableTo(Type baseType) =>
+            type => baseType.GetTypeInfo().IsAssignableFrom(type.GetTypeInfo());
     }
 }
