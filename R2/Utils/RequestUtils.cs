@@ -16,7 +16,7 @@ namespace R2
         {
             EnsureArg.IsNotNull(target, nameof(target));
             EnsureArg.IsNotNull(files, nameof(files));
-            EnsureArg.HasItems(files, nameof(files), options => options.WithMessage("File collection is empty."));
+            EnsureArg.HasItems(files, optsFn: options => options.WithMessage("File collection is empty."));
 
             var targetTypeInfo = target.GetType().GetTypeInfo();
 
