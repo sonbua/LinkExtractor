@@ -1,4 +1,5 @@
 ﻿using System;
+using EnsureThat;
 
 namespace R2.DependencyInjection
 {
@@ -6,10 +7,7 @@ namespace R2.DependencyInjection
     {
         public static T GetService<T>(this IServiceProvider serviceProvider)
         {
-            if (serviceProvider == null)
-            {
-                throw new ArgumentNullException(nameof(serviceProvider));
-            }
+            EnsureArg.IsNotNull(serviceProvider, nameof(serviceProvider));
 
             return (T) serviceProvider.GetService(typeof(T));
         }

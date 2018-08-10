@@ -1,7 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using EnsureThat;
 
 namespace R2
 {
@@ -41,20 +41,14 @@ namespace R2
 
         public void CopyTo(Stream target)
         {
-            if (target == null)
-            {
-                throw new ArgumentNullException(nameof(target));
-            }
+            EnsureArg.IsNotNull(target, nameof(target));
 
             OpenReadStream().CopyTo(target, DefaultBufferSize);
         }
 
         public async Task CopyToAsync(Stream target, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (target == null)
-            {
-                throw new ArgumentNullException(nameof(target));
-            }
+            EnsureArg.IsNotNull(target, nameof(target));
 
             await OpenReadStream().CopyToAsync(target, DefaultBufferSize, cancellationToken);
         }

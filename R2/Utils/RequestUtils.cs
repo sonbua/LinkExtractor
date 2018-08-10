@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reflection;
+using EnsureThat;
 
 namespace R2
 {
@@ -15,20 +14,9 @@ namespace R2
         /// <param name="files">The files to be assigned to Files property on the <paramref name="target"/> object.</param>
         public static void AttachFilesToRequestObject(IUpload target, IList<IFile> files)
         {
-            if (target == null)
-            {
-                throw new ArgumentNullException(nameof(target));
-            }
-
-            if (files == null)
-            {
-                throw new ArgumentNullException(nameof(files));
-            }
-
-            if (!files.Any())
-            {
-                throw new ArgumentException("File collection is empty.", nameof(files));
-            }
+            EnsureArg.IsNotNull(target, nameof(target));
+            EnsureArg.IsNotNull(files, nameof(files));
+            EnsureArg.HasItems(files, nameof(files), options => options.WithMessage("File collection is empty."));
 
             var targetTypeInfo = target.GetType().GetTypeInfo();
 
