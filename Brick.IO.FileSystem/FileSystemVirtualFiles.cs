@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using EnsureThat;
 
 namespace Brick.IO
 {
@@ -15,15 +16,14 @@ namespace Brick.IO
 
         public FileSystemVirtualFiles(DirectoryInfo rootDirectoryInfo)
         {
-            if (rootDirectoryInfo == null)
-            {
-                throw new ArgumentNullException(nameof(rootDirectoryInfo));
-            }
+            EnsureArg.IsNotNull(rootDirectoryInfo, nameof(rootDirectoryInfo));
 
-            if (!rootDirectoryInfo.Exists)
-            {
-                throw new Exception($"Root directory '{RootDirectoryInfo.FullName}' for virtual path does not exist.");
-            }
+            EnsureArg.IsTrue(
+                rootDirectoryInfo.Exists,
+                optsFn: options => options.WithMessage(
+                    $"Root directory '{rootDirectoryInfo.FullName}' for virtual path does not exist."
+                )
+            );
 
             RootDirectoryInfo = rootDirectoryInfo;
             RootDirectory = new FileSystemVirtualDirectory(this, NullVirtualDirectory.Instance, RootDirectoryInfo);

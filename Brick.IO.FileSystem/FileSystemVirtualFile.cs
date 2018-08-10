@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using EnsureThat;
 
 namespace Brick.IO
 {
@@ -13,7 +14,9 @@ namespace Brick.IO
             FileInfo fileInfo)
             : base(owningProvider, directory)
         {
-            BackingFileInfo = fileInfo ?? throw new ArgumentNullException(nameof(fileInfo));
+            EnsureArg.IsNotNull(fileInfo, nameof(fileInfo));
+
+            BackingFileInfo = fileInfo;
         }
 
         public override string Name => BackingFileInfo.Name;

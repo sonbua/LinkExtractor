@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using EnsureThat;
 
 namespace Brick.IO
 {
@@ -15,7 +16,9 @@ namespace Brick.IO
             DirectoryInfo directoryInfo)
             : base(owningProvider, parentDirectory)
         {
-            BackingDirectoryInfo = directoryInfo ?? throw new ArgumentNullException(nameof(directoryInfo));
+            EnsureArg.IsNotNull(directoryInfo, nameof(directoryInfo));
+
+            BackingDirectoryInfo = directoryInfo;
         }
 
         public override string Name => BackingDirectoryInfo.Name;
