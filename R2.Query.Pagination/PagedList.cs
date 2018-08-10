@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using EnsureThat;
 
 namespace R2
 {
@@ -33,28 +34,9 @@ namespace R2
 
         protected PagedList(IQueryable<TItem> queryable, int pageNumber, int pageSize)
         {
-            if (queryable == null)
-            {
-                throw new ArgumentNullException(nameof(queryable));
-            }
-
-            if (pageNumber < 1)
-            {
-                throw new ArgumentOutOfRangeException(
-                    paramName: nameof(pageNumber),
-                    actualValue: pageNumber,
-                    message: _PAGE_NUMBER_BELOW_1
-                );
-            }
-
-            if (pageSize < 1)
-            {
-                throw new ArgumentOutOfRangeException(
-                    paramName: nameof(pageSize),
-                    actualValue: pageSize,
-                    message: _PAGE_SIZE_LESS_THAN_1
-                );
-            }
+            EnsureArg.IsNotNull(queryable, nameof(queryable));
+            EnsureArg.IsGte(pageNumber, 1, optsFn: options => options.WithMessage(_PAGE_NUMBER_BELOW_1));
+            EnsureArg.IsGte(pageSize, 1, optsFn: options => options.WithMessage(_PAGE_SIZE_LESS_THAN_1));
 
             TotalItemCount = queryable.Count();
             PageSize = pageSize;
@@ -81,23 +63,8 @@ namespace R2
 
         protected PagedList(IEnumerable<TItem> enumerable, int pageNumber, int pageSize)
         {
-            if (pageNumber < 1)
-            {
-                throw new ArgumentOutOfRangeException(
-                    paramName: nameof(pageNumber),
-                    actualValue: pageNumber,
-                    message: _PAGE_NUMBER_BELOW_1
-                );
-            }
-
-            if (pageSize < 1)
-            {
-                throw new ArgumentOutOfRangeException(
-                    paramName: nameof(pageSize),
-                    actualValue: pageSize,
-                    message: _PAGE_SIZE_LESS_THAN_1
-                );
-            }
+            EnsureArg.IsGte(pageNumber, 1, optsFn: options => options.WithMessage(_PAGE_NUMBER_BELOW_1));
+            EnsureArg.IsGte(pageSize, 1, optsFn: options => options.WithMessage(_PAGE_SIZE_LESS_THAN_1));
 
             var items = enumerable?.ToArray() ?? new TItem[0];
 
