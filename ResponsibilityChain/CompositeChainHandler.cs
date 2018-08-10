@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using EnsureThat;
 
 namespace ResponsibilityChain
 {
@@ -34,10 +35,7 @@ namespace ResponsibilityChain
 
         protected void AddHandler(IChainHandler<TRequest, TResponse> handler)
         {
-            if (handler == null)
-            {
-                throw new ArgumentNullException(nameof(handler));
-            }
+            EnsureArg.IsNotNull(handler, nameof(handler));
 
             Handlers.Add(handler);
         }
@@ -45,10 +43,7 @@ namespace ResponsibilityChain
         protected void AddHandler<THandler>(IServiceProvider serviceProvider)
             where THandler : IChainHandler<TRequest, TResponse>
         {
-            if (serviceProvider == null)
-            {
-                throw new ArgumentNullException(nameof(serviceProvider));
-            }
+            EnsureArg.IsNotNull(serviceProvider, nameof(serviceProvider));
 
             var handler = (THandler) serviceProvider.GetService(typeof(THandler));
 
