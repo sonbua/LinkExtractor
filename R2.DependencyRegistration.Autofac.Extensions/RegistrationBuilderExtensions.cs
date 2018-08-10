@@ -3,9 +3,13 @@ using System.Reflection;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Features.Scanning;
+using EnsureThat;
 
 namespace R2.DependencyRegistration.Autofac.Extensions
 {
+    /// <summary>
+    /// Note: Autofac.Util might be the more better place for this extension methods.
+    /// </summary>
     public static class RegistrationBuilderExtensions
     {
         /// <summary>
@@ -26,15 +30,8 @@ namespace R2.DependencyRegistration.Autofac.Extensions
                 Type baseType)
             where TScanningActivatorData : ScanningActivatorData
         {
-            if (registration == null)
-            {
-                throw new ArgumentNullException(nameof(registration));
-            }
-
-            if (baseType == null)
-            {
-                throw new ArgumentNullException(nameof(baseType));
-            }
+            EnsureArg.IsNotNull(registration, nameof(registration));
+            EnsureArg.IsNotNull(baseType, nameof(baseType));
 
             var filter = TypesFilter(baseType);
 
