@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using EnsureThat;
 
 namespace Brick.IO
 {
@@ -38,10 +38,7 @@ namespace Brick.IO
         /// </summary>
         public static byte[] ReadFully(this Stream input, int bufferSize)
         {
-            if (bufferSize < 1)
-            {
-                throw new ArgumentOutOfRangeException(nameof(bufferSize));
-            }
+            EnsureArg.IsGte(bufferSize, 1, nameof(bufferSize));
 
             return input.ReadFully(new byte[bufferSize]);
         }
@@ -54,20 +51,9 @@ namespace Brick.IO
         /// </summary>
         public static byte[] ReadFully(this Stream input, byte[] buffer)
         {
-            if (buffer == null)
-            {
-                throw new ArgumentNullException(nameof(buffer));
-            }
-
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
-            if (buffer.Length == 0)
-            {
-                throw new ArgumentException("Buffer has length of 0.");
-            }
+            EnsureArg.IsNotNull(buffer, nameof(buffer));
+            EnsureArg.IsNotNull(input, nameof(input));
+            EnsureArg.IsGt(buffer.Length, 0, optsFn: options => options.WithMessage("Buffer has length of 0."));
 
             using (var stream = new MemoryStream())
             {
@@ -86,25 +72,10 @@ namespace Brick.IO
         /// </summary>
         public static long CopyTo(this Stream input, Stream output, byte[] buffer)
         {
-            if (buffer == null)
-            {
-                throw new ArgumentNullException(nameof(buffer));
-            }
-
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
-            if (output == null)
-            {
-                throw new ArgumentNullException(nameof(output));
-            }
-
-            if (buffer.Length == 0)
-            {
-                throw new ArgumentException("Buffer has length of 0.");
-            }
+            EnsureArg.IsNotNull(buffer, nameof(buffer));
+            EnsureArg.IsNotNull(input, nameof(input));
+            EnsureArg.IsNotNull(output, nameof(output));
+            EnsureArg.IsGt(buffer.Length, 0, optsFn: options => options.WithMessage("Buffer has length of 0."));
 
             return CopyToImpl(input, output, buffer).Sum();
         }
@@ -124,7 +95,7 @@ namespace Brick.IO
         public static long WriteTo(this Stream inStream, Stream outStream)
         {
             MemoryStream memoryStream;
-            
+
             if ((memoryStream = inStream as MemoryStream) != null)
             {
                 memoryStream.WriteTo(outStream);
@@ -138,11 +109,11 @@ namespace Brick.IO
         {
             var buffer = new byte[4096];
             int bytesRead;
-            
+
             while ((bytesRead = inStream.Read(buffer, 0, buffer.Length)) > 0)
             {
                 outStream.Write(buffer, 0, bytesRead);
-                
+
                 yield return bytesRead;
             }
         }

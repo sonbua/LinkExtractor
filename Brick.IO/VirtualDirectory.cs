@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using EnsureThat;
 
 namespace Brick.IO
 {
@@ -15,7 +16,9 @@ namespace Brick.IO
 
         protected VirtualDirectory(IVirtualPathProvider owningProvider, IVirtualDirectory parentDirectory)
         {
-            VirtualPathProvider = owningProvider ?? throw new ArgumentNullException(nameof(owningProvider));
+            EnsureArg.IsNotNull(owningProvider, nameof(owningProvider));
+
+            VirtualPathProvider = owningProvider;
             ParentDirectory = parentDirectory;
         }
 

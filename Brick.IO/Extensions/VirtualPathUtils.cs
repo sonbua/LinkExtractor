@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EnsureThat;
 
 namespace Brick.IO
 {
@@ -11,10 +12,7 @@ namespace Brick.IO
 
         public static Stack<string> TokenizeVirtualPath(this string virtualPath, IVirtualPathProvider pathProvider)
         {
-            if (pathProvider == null)
-            {
-                throw new ArgumentNullException(nameof(pathProvider));
-            }
+            EnsureArg.IsNotNull(pathProvider, nameof(pathProvider));
 
             return TokenizeVirtualPath(virtualPath, pathProvider.VirtualPathSeparator);
         }

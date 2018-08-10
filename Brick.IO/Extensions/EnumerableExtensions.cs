@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using EnsureThat;
 
 namespace Brick.IO
 {
@@ -7,15 +8,8 @@ namespace Brick.IO
     {
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-
-            if (action == null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            EnsureArg.IsNotNull(source, nameof(source));
+            EnsureArg.IsNotNull(action, nameof(action));
 
             foreach (var item in source)
             {

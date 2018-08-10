@@ -1,4 +1,5 @@
 ﻿using System;
+using EnsureThat;
 
 namespace Brick.IO
 {
@@ -15,10 +16,7 @@ namespace Brick.IO
 
         public virtual bool FileExists(string virtualPath)
         {
-            if (virtualPath == null)
-            {
-                throw new ArgumentNullException(nameof(virtualPath));
-            }
+            EnsureArg.IsNotNull(virtualPath, nameof(virtualPath));
 
             var virtualFile = GetFile(SanitizePath(virtualPath));
 
@@ -27,10 +25,7 @@ namespace Brick.IO
 
         public virtual bool DirectoryExists(string virtualPath)
         {
-            if (virtualPath == null)
-            {
-                throw new ArgumentNullException(nameof(virtualPath));
-            }
+            EnsureArg.IsNotNull(virtualPath, nameof(virtualPath));
 
             var virtualDirectory = GetDirectory(SanitizePath(virtualPath));
 
@@ -39,10 +34,7 @@ namespace Brick.IO
 
         public virtual IVirtualFile GetFile(string virtualPath)
         {
-            if (virtualPath == null)
-            {
-                throw new ArgumentNullException(nameof(virtualPath));
-            }
+            EnsureArg.IsNotNull(virtualPath, nameof(virtualPath));
 
             return RootDirectory.GetFile(SanitizePath(virtualPath));
         }
@@ -60,10 +52,7 @@ namespace Brick.IO
 
         protected static string SanitizePath(string filePath)
         {
-            if (filePath == null)
-            {
-                throw new ArgumentNullException(nameof(filePath));
-            }
+            EnsureArg.IsNotNull(filePath, nameof(filePath));
 
             return SanitizePathImpl(filePath);
         }

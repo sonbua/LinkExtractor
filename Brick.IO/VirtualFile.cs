@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using EnsureThat;
 
 namespace Brick.IO
 {
@@ -8,8 +9,11 @@ namespace Brick.IO
     {
         protected VirtualFile(IVirtualPathProvider owningProvider, IVirtualDirectory directory)
         {
-            VirtualPathProvider = owningProvider ?? throw new ArgumentNullException(nameof(owningProvider));
-            Directory = directory ?? throw new ArgumentNullException(nameof(directory));
+            EnsureArg.IsNotNull(owningProvider, nameof(owningProvider));
+            EnsureArg.IsNotNull(directory, nameof(directory));
+
+            VirtualPathProvider = owningProvider;
+            Directory = directory;
         }
 
         public static List<string> ScanSkipPaths { get; } = new List<string>();
