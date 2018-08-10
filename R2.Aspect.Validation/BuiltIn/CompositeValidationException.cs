@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using EnsureThat;
 
 namespace R2.Aspect.Validation.BuiltIn
 {
@@ -42,10 +43,7 @@ namespace R2.Aspect.Validation.BuiltIn
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (info == null)
-            {
-                throw new ArgumentNullException(nameof(info));
-            }
+            EnsureArg.IsNotNull(info, nameof(info));
 
             info.AddValue(nameof(ValidationResults), ValidationResults, typeof(List<ValidationResult>));
 
