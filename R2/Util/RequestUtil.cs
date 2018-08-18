@@ -5,13 +5,13 @@ using EnsureThat;
 
 namespace R2
 {
-    public static class RequestUtils
+    public static class RequestUtil
     {
         /// <summary>
-        /// Attachs file to an object. A property named "Files" of type <see cref="IReadOnlyList{IFile}"/> on the <paramref name="target"/> object must be present.
+        /// Attachs files to <see cref="IUpload.Files"/> property of an <see cref="IUpload"/> object;
         /// </summary>
-        /// <param name="target">The object to be assigned a file to.</param>
-        /// <param name="files">The files to be assigned to Files property on the <paramref name="target"/> object.</param>
+        /// <param name="target">The object, that files are being attached to.</param>
+        /// <param name="files">The files to be attached to <see cref="IUpload.Files"/> property on the <paramref name="target"/> object.</param>
         public static void AttachFilesToRequestObject(IUpload target, IList<IFile> files)
         {
             EnsureArg.IsNotNull(target, nameof(target));

@@ -45,7 +45,7 @@ namespace R2.Routing
             var routeEntry = _uploadRouteTable.Table[uploadName.ToLower()];
             var uploadObject = (IUpload) Activator.CreateInstance(routeEntry.RequestType);
 
-            RequestUtils.AttachFilesToRequestObject(uploadObject, files);
+            RequestUtil.AttachFilesToRequestObject(uploadObject, files);
 
             return await _requestProcessor.ProcessUpload(uploadObject, routeEntry.HandlerType);
         }
