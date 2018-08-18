@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Brick.IO
@@ -21,26 +22,26 @@ namespace Brick.IO
             var builder = new StringBuilder(sanitizedPath);
 
             AppendPaths(builder, thesePaths);
-            
+
             return builder.ToString();
         }
 
         private static void AppendPaths(StringBuilder builder, IEnumerable<string> paths)
         {
-            foreach (var path in paths)
+            foreach (var path in paths.Sanitize())
             {
-                if (string.IsNullOrEmpty(path))
-                {
-                    continue;
-                }
-
                 if (builder.Length > 0 && builder[builder.Length - 1] != '/')
                 {
                     builder.Append("/");
                 }
 
-                builder.Append(path.Replace('\\', '/').TrimStart('/'));
+                builder.Append(path);
             }
         }
+
+        private static IEnumerable<string> Sanitize(this IEnumerable<string> paths) =>
+            from path in paths
+            where !string.IsNullOrEmpty(path)
+            select path.Replace('\\', '/').TrimStart('/');
     }
 }

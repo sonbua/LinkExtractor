@@ -10,13 +10,6 @@ namespace Brick.IO
     {
         public static TimeSpan MaxRetryOnTimeoutException { get; } = TimeSpan.FromSeconds(10);
 
-        public static Stack<string> TokenizeVirtualPath(this string virtualPath, IVirtualPathProvider pathProvider)
-        {
-            EnsureArg.IsNotNull(pathProvider, nameof(pathProvider));
-
-            return TokenizeVirtualPath(virtualPath, pathProvider.VirtualPathSeparator);
-        }
-
         public static Stack<string> TokenizeVirtualPath(this string virtualPath, string virtualPathSeparator)
         {
             if (string.IsNullOrEmpty(virtualPath))

@@ -44,7 +44,7 @@ namespace Brick.IO
 
         public virtual IVirtualFile GetFile(string virtualPath)
         {
-            var tokens = virtualPath.TokenizeVirtualPath(VirtualPathProvider);
+            var tokens = virtualPath.TokenizeVirtualPath(VirtualPathProvider.VirtualPathSeparator);
 
             return GetFile(tokens);
         }
@@ -70,7 +70,7 @@ namespace Brick.IO
 
         public virtual IVirtualDirectory GetDirectory(string virtualPath)
         {
-            var tokens = virtualPath.TokenizeVirtualPath(VirtualPathProvider);
+            var tokens = virtualPath.TokenizeVirtualPath(VirtualPathProvider.VirtualPathSeparator);
 
             return GetDirectory(tokens);
         }

@@ -53,11 +53,6 @@ namespace Brick.IO
         {
             EnsureArg.IsNotNull(filePath, nameof(filePath));
 
-            return SanitizePathImpl(filePath);
-        }
-
-        private static string SanitizePathImpl(string filePath)
-        {
             if (filePath == string.Empty)
             {
                 return filePath;
