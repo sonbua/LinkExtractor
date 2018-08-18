@@ -33,7 +33,7 @@ namespace Brick.IO
             var firstAttempt = DateTime.UtcNow;
             IOException originalException = null;
 
-            while (DateTime.UtcNow - firstAttempt < VirtualPathUtils.MaxRetryOnTimeoutException)
+            while (DateTime.UtcNow - firstAttempt < VirtualPathUtil.MaxRetryOnTimeoutException)
             {
                 try
                 {
@@ -53,7 +53,7 @@ namespace Brick.IO
             }
 
             throw new TimeoutException(
-                $"Exceeded timeout of {VirtualPathUtils.MaxRetryOnTimeoutException}",
+                $"Exceeded timeout of {VirtualPathUtil.MaxRetryOnTimeoutException}",
                 originalException
             );
         }

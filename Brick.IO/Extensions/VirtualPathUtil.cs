@@ -6,7 +6,7 @@ using EnsureThat;
 
 namespace Brick.IO
 {
-    public static class VirtualPathUtils
+    public static class VirtualPathUtil
     {
         public static TimeSpan MaxRetryOnTimeoutException { get; } = TimeSpan.FromSeconds(10);
 

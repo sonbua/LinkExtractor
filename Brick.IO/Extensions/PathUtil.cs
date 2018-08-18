@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Brick.IO
 {
-    public static class PathUtils
+    public static class PathUtil
     {
         public static string CombineWith(this string path, params string[] thesePaths)
         {
