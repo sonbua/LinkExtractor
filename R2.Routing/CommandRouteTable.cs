@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,10 +22,13 @@ namespace R2.Routing
 
         private ConcurrentDictionary<string, RouteEntry> InitializeTable()
         {
+            IEnumerable<string> ThrowNotSupported(Type request) =>
+                ThrowNotSupportedRouteHandler.Instance.Handle(request, null);
+
             var routeEntries =
                 from component in _commandComponents
                 let componentType = component.GetType()
-                from routePath in _routeHandler.Handle(componentType)
+                from routePath in _routeHandler.Handle(componentType, ThrowNotSupported)
                 select new RouteEntry
                 {
                     RoutePath = routePath.ToLower(),

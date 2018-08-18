@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,6 +22,9 @@ namespace R2.Routing
 
         private ConcurrentDictionary<string, RouteEntry> InitializeTable()
         {
+            IEnumerable<string> ThrowNotSupported(Type request) =>
+                ThrowNotSupportedRouteHandler.Instance.Handle(request, null);
+
             var routeEntries =
                 from component in _queryComponents
                 let componentType = component.GetType()
@@ -29,7 +33,7 @@ namespace R2.Routing
                 )
                 let resultType = serviceType.GenericTypeArguments[0]
                 let handlerType = typeof(IQueryHandler<,>).MakeGenericType(componentType, resultType)
-                from routePath in _routeHandler.Handle(componentType)
+                from routePath in _routeHandler.Handle(componentType, ThrowNotSupported)
                 select new RouteEntry
                 {
                     RoutePath = routePath.ToLower(),

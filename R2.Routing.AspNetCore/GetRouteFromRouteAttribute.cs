@@ -7,23 +7,21 @@ namespace R2.Routing.AspNetCore
 {
     public class GetRouteFromRouteAttribute : IRouteHandler
     {
-        private IEnumerable<RouteAttribute> _routeAttributes;
+        public IEnumerable<string> Handle(Type requestType, Func<Type, IEnumerable<string>> next) =>
+            HasRouteAttribute(requestType, out var routeAttributes)
+                ? HandleImpl(routeAttributes)
+                : next.Invoke(requestType);
 
-        public GetRouteFromRouteAttribute()
+        private static bool HasRouteAttribute(Type requestType, out IEnumerable<RouteAttribute> routeAttributes)
         {
-            _routeAttributes = Enumerable.Empty<RouteAttribute>();
+            routeAttributes = requestType.GetCustomAttributes<RouteAttribute>(inherit: true);
+
+            return routeAttributes.Any();
         }
 
-        public bool CanHandle(Type requestType)
+        private static IEnumerable<string> HandleImpl(IEnumerable<RouteAttribute> routeAttributes)
         {
-            _routeAttributes = requestType.GetCustomAttributes<RouteAttribute>(inherit: true);
-
-            return _routeAttributes.Any();
-        }
-
-        public IEnumerable<string> Handle(Type requestType)
-        {
-            foreach (var routeAttribute in _routeAttributes)
+            foreach (var routeAttribute in routeAttributes)
             {
                 if (routeAttribute.Prefix == string.Empty)
                 {

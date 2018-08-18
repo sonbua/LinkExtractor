@@ -5,11 +5,12 @@ namespace R2.Routing
 {
     public class GetRouteFromCommandTypeName : IRouteHandler
     {
-        public bool CanHandle(Type commandType) => typeof(ICommand).IsAssignableFrom(commandType);
+        public IEnumerable<string> Handle(Type commandType, Func<Type, IEnumerable<string>> next) =>
+            IsCommandType(commandType)
+                ? new[] {commandType.Name}
+                : next.Invoke(commandType);
 
-        public IEnumerable<string> Handle(Type commandType)
-        {
-            yield return commandType.Name;
-        }
+        private static bool IsCommandType(Type commandType) =>
+            typeof(ICommand).IsAssignableFrom(commandType);
     }
 }

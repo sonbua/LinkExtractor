@@ -4,7 +4,7 @@ using ResponsibilityChain;
 
 namespace R2.Routing
 {
-    public interface IRouteHandler : IChainHandler<Type, IEnumerable<string>>
+    public interface IRouteHandler : IHandler<Type, IEnumerable<string>>
     {
     }
 }

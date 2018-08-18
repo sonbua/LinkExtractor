@@ -5,11 +5,12 @@ namespace R2.Routing
 {
     public class GetRouteFromUploadTypeName : IRouteHandler
     {
-        public bool CanHandle(Type uploadType) => typeof(IUpload).IsAssignableFrom(uploadType);
+        public IEnumerable<string> Handle(Type uploadType, Func<Type, IEnumerable<string>> next) =>
+            IsUploadType(uploadType)
+                ? new[] {uploadType.Name}
+                : next.Invoke(uploadType);
 
-        public IEnumerable<string> Handle(Type uploadType)
-        {
-            yield return uploadType.Name;
-        }
+        private static bool IsUploadType(Type uploadType) =>
+            typeof(IUpload).IsAssignableFrom(uploadType);
     }
 }
