@@ -87,13 +87,14 @@ namespace Brick.IO
 
         protected virtual string GetPathToRoot(string separator, Func<IVirtualDirectory, string> pathSelector)
         {
-            var parentPath = Directory != null ? pathSelector(Directory) : string.Empty;
-            if (parentPath == separator)
+            if (ReferenceEquals(Directory, NullVirtualDirectory.Instance))
             {
-                parentPath = string.Empty;
+                return Name;
             }
 
-            return parentPath == null
+            var parentPath = pathSelector(Directory);
+
+            return parentPath == string.Empty
                 ? Name
                 : string.Concat(parentPath, separator, Name);
         }

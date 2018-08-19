@@ -16,8 +16,6 @@ namespace Brick.IO
             DirectoryInfo directoryInfo)
             : base(owningProvider, parentDirectory)
         {
-            EnsureArg.IsNotNull(directoryInfo, nameof(directoryInfo));
-
             BackingDirectoryInfo = directoryInfo;
         }
 
@@ -52,18 +50,18 @@ namespace Brick.IO
         {
             var fileInfo = EnumerateFiles(fileName).FirstOrDefault();
 
-            return fileInfo != null
-                ? new FileSystemVirtualFile(VirtualPathProvider, this, fileInfo)
-                : NullVirtualFile.Instance;
+            return fileInfo == null
+                ? NullVirtualFile.Instance
+                : new FileSystemVirtualFile(VirtualPathProvider, this, fileInfo);
         }
 
         protected override IVirtualDirectory GetDirectoryFromBackingDirectoryOrDefault(string directoryName)
         {
             var directoryInfo = EnumerateDirectories(directoryName).FirstOrDefault();
 
-            return directoryInfo != null
-                ? new FileSystemVirtualDirectory(VirtualPathProvider, this, directoryInfo)
-                : NullVirtualDirectory.Instance;
+            return directoryInfo == null
+                ? NullVirtualDirectory.Instance
+                : new FileSystemVirtualDirectory(VirtualPathProvider, this, directoryInfo);
         }
 
         private DirectoryInfo[] GetDirectories() => BackingDirectoryInfo.GetDirectories();

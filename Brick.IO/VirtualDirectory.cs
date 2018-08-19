@@ -17,6 +17,7 @@ namespace Brick.IO
         protected VirtualDirectory(IVirtualPathProvider owningProvider, IVirtualDirectory parentDirectory)
         {
             EnsureArg.IsNotNull(owningProvider, nameof(owningProvider));
+            EnsureArg.IsNotNull(parentDirectory, nameof(parentDirectory));
 
             VirtualPathProvider = owningProvider;
             ParentDirectory = parentDirectory;
@@ -65,7 +66,9 @@ namespace Brick.IO
 
             var virtualDirectory = GetDirectoryFromBackingDirectoryOrDefault(pathToken);
 
-            return virtualDirectory.GetFile(virtualPath);
+            return ReferenceEquals(virtualDirectory, NullVirtualDirectory.Instance)
+                ? NullVirtualFile.Instance
+                : virtualDirectory.GetFile(virtualPath);
         }
 
         public virtual IVirtualDirectory GetDirectory(string virtualPath)
@@ -86,7 +89,7 @@ namespace Brick.IO
 
             var virtualDirectory = GetDirectoryFromBackingDirectoryOrDefault(pathToken);
 
-            if (virtualDirectory == null)
+            if (ReferenceEquals(virtualDirectory, NullVirtualDirectory.Instance))
             {
                 return NullVirtualDirectory.Instance;
             }
@@ -115,24 +118,21 @@ namespace Brick.IO
         public override string ToString() => $"{RealPath} -> {VirtualPath}";
 
         protected virtual string GetVirtualPathToRoot() =>
-            IsRoot
-                ? string.Empty
-                : GetPathToRoot(VirtualPathProvider.VirtualPathSeparator, p => p.VirtualPath);
+            GetPathToRoot(VirtualPathProvider.VirtualPathSeparator, p => p.VirtualPath);
 
-        protected virtual string GetRealPathToRoot()
-        {
-            return GetPathToRoot(VirtualPathProvider.RealPathSeparator, p => p.RealPath);
-        }
+        protected virtual string GetRealPathToRoot() =>
+            GetPathToRoot(VirtualPathProvider.RealPathSeparator, p => p.RealPath);
 
         protected virtual string GetPathToRoot(string separator, Func<IVirtualDirectory, string> pathSelector)
         {
-            var parentPath = ParentDirectory != null ? pathSelector(ParentDirectory) : string.Empty;
-            if (parentPath == separator)
+            if (IsRoot)
             {
-                parentPath = string.Empty;
+                return string.Empty;
             }
 
-            return parentPath == null
+            var parentPath = pathSelector(ParentDirectory);
+
+            return parentPath == string.Empty
                 ? Name
                 : string.Concat(parentPath, separator, Name);
         }

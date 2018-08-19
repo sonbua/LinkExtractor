@@ -49,21 +49,13 @@ namespace Brick.IO
 
         private static bool IsRoot(string virtualPath) => virtualPath == string.Empty || virtualPath == "/";
 
-        protected static string SanitizePath(string filePath)
+        protected static string SanitizePath(string virtualPath)
         {
-            EnsureArg.IsNotNull(filePath, nameof(filePath));
+            EnsureArg.IsNotNull(virtualPath, nameof(virtualPath));
 
-            if (filePath == string.Empty)
-            {
-                return filePath;
-            }
-
-            var sanitizedPath =
-                filePath[0] == '/'
-                    ? filePath.Substring(1)
-                    : filePath;
-
-            return sanitizedPath.Replace('\\', '/');
+            return virtualPath == string.Empty
+                ? string.Empty
+                : virtualPath.Replace('\\', '/').TrimStart('/');
         }
     }
 }
