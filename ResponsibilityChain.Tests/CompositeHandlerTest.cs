@@ -41,7 +41,7 @@ namespace ResponsibilityChain.Tests
 
             public override int Handle(string request, Func<string, int> next)
             {
-                return request.Split(" ").Select(piece => base.Handle(piece, null)).Sum();
+                return request.Split(' ').Select(piece => base.Handle(piece, null)).Sum();
             }
         }
 
