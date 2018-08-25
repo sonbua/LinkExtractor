@@ -6,18 +6,18 @@ namespace ResponsibilityChain
 {
     public class CompositeHandler<TRequest, TResponse> : IHandler<TRequest, TResponse>
     {
-        protected readonly List<IHandler<TRequest, TResponse>> Handlers;
+        private readonly List<IHandler<TRequest, TResponse>> _handlers;
 
         public CompositeHandler()
         {
-            Handlers = new List<IHandler<TRequest, TResponse>>();
+            _handlers = new List<IHandler<TRequest, TResponse>>();
         }
 
         public virtual TResponse Handle(TRequest request, Func<TRequest, TResponse> next)
         {
-            EnsureArg.HasItems(Handlers, nameof(Handlers));
+            EnsureArg.HasItems(_handlers, nameof(_handlers));
 
-            var handler = Handlers.CreatePipelineExecutionDelegate(next);
+            var handler = _handlers.CreatePipelineExecutionDelegate(next);
 
             return handler.Invoke(request);
         }
@@ -26,7 +26,7 @@ namespace ResponsibilityChain
         {
             EnsureArg.IsNotNull(handler, nameof(handler));
 
-            Handlers.Add(handler);
+            _handlers.Add(handler);
         }
 
         protected void AddHandler<THandler>(IServiceProvider serviceProvider)
@@ -36,7 +36,7 @@ namespace ResponsibilityChain
 
             var handler = (THandler) serviceProvider.GetService(typeof(THandler));
 
-            Handlers.Add(handler);
+            _handlers.Add(handler);
         }
     }
 }
