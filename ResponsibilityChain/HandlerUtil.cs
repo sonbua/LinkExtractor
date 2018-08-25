@@ -12,34 +12,46 @@ namespace ResponsibilityChain
             this IList<IHandler<TRequest, TResponse>> handlers,
             Func<TRequest, TResponse> next)
         {
-            if (next == null)
-            {
-                next = request => ThrowNotSupportedHandler<TRequest, TResponse>.Instance.Handle(request, null);
-            }
+            var nextAsExpression = NextAsExpression(next);
 
-            return (Func<TRequest, TResponse>) handlers.CreatePipelineExecutionExpression(next).Compile();
+            return handlers.CreatePipelineExecutionExpression(nextAsExpression).Compile();
         }
 
+        /// Returns
+        /// <code>
+        /// requestN => next(requestN)
+        /// </code>
+        private static Expression<Func<TRequest, TResponse>> NextAsExpression<TRequest, TResponse>(
+            Func<TRequest, TResponse> next)
+        {
+            if (next == null)
+            {
+                return requestN => ThrowNotSupportedHandler<TRequest, TResponse>.Instance.Handle(requestN, null);
+            }
+
+            return requestN => next(requestN);
+        }
+
+        /// Returns
         /// <code>
         /// rootRequest
         ///    => handler0.Invoke(rootRequest,
         ///       request0 => handler1.Invoke(request0,
-        ///        ...
-        ///          request{N-1} => handler{N}.Invoke(request{N-1},
-        ///             request{N} => next(request{N})))
+        ///          ...
+        ///          request{N-1} => handler{N}.Invoke(request{N-1}, next)))
         /// </code>
-        private static LambdaExpression CreatePipelineExecutionExpression<TRequest, TResponse>(
+        private static Expression<Func<TRequest, TResponse>> CreatePipelineExecutionExpression<TRequest, TResponse>(
             this IList<IHandler<TRequest, TResponse>> handlers,
-            Func<TRequest, TResponse> next)
+            Expression<Func<TRequest, TResponse>> next)
         {
-            var lambdaExpression = InitialLambdaExpression(next, handlers.Count);
+            var lambdaExpression = next;
 
             // request{i} => handler.Invoke(request{i}, previous)
-            for (var index = handlers.Count - 1; index >= 0; index--)
+            for (var i = handlers.Count - 1; i >= 0; i--)
             {
-                var handler = handlers[index];
+                var handler = handlers[i];
                 var handleMethodInfo = handler.ImplementedHandleMethod();
-                var requestParameter = Expression.Parameter(typeof(TRequest), $"request{index}");
+                var requestParameter = Expression.Parameter(typeof(TRequest), $"request{i}");
 
                 var body = Expression.Call(
                     Expression.Constant(handler),
@@ -48,7 +60,7 @@ namespace ResponsibilityChain
                     lambdaExpression
                 );
 
-                lambdaExpression = Expression.Lambda(body, requestParameter);
+                lambdaExpression = Expression.Lambda<Func<TRequest, TResponse>>(body, requestParameter);
             }
 
             return lambdaExpression;
@@ -68,19 +80,6 @@ namespace ResponsibilityChain
             var handlerInterfaceType = typeof(IHandler<TRequest, TResponse>);
 
             return handlerTypeInfo.GetInterfaceMap(handlerInterfaceType).TargetMethods.Single();
-        }
-
-        /// <code>
-        /// request{N} => next(request{N})
-        /// </code>
-        private static LambdaExpression InitialLambdaExpression<TRequest, TResponse>(
-            Func<TRequest, TResponse> next,
-            int handlersCount)
-        {
-            var requestNParameter = Expression.Parameter(typeof(TRequest), $"request{handlersCount}");
-            var invokeExpression = Expression.Invoke(Expression.Constant(next), requestNParameter);
-
-            return Expression.Lambda(invokeExpression, requestNParameter);
         }
     }
 }
