@@ -11,27 +11,27 @@ namespace ResponsibilityChain.Tests
         [InlineData("20m", 20)]
         [InlineData("1h", 60)]
         [InlineData("2h 10m", 130)]
-        public void GivenTextWithMinuteUnit_ReturnsCorrectNumberOfMinutes(string worklog, int expected)
+        public void GivenTextWithMinuteUnit_ReturnsCorrectNumberOfMinutes(string workLog, int expected)
         {
             // arrange
-            IWorklogParser parser = new WorklogParser();
+            IWorkLogParser parser = new WorkLogParser();
 
             // act
-            var actual = parser.Handle(worklog, null);
+            var actual = parser.Handle(workLog, null);
 
             // assert
             Assert.Equal(expected, actual);
         }
 
-        internal class WorklogParser : CompositeHandler<string, int>, IWorklogParser
+        internal class WorkLogParser : CompositeHandler<string, int>, IWorkLogParser
         {
-            public WorklogParser()
+            public WorkLogParser()
             {
                 AddHandler(new TechnicalLeaderParser());
             }
         }
 
-        internal class TechnicalLeaderParser : CompositeHandler<string, int>, IWorklogParser
+        internal class TechnicalLeaderParser : CompositeHandler<string, int>, IWorkLogParser
         {
             public TechnicalLeaderParser()
             {
@@ -41,11 +41,11 @@ namespace ResponsibilityChain.Tests
 
             public override int Handle(string request, Func<string, int> next)
             {
-                return request.Split(' ').Select(piece => base.Handle(piece, null)).Sum();
+                return request.Split(' ').Select(piece => base.Handle(piece, next)).Sum();
             }
         }
 
-        internal class HourParser : IWorklogParser
+        internal class HourParser : IWorkLogParser
         {
             private readonly Regex _pattern = new Regex("^(\\d+)h$");
 
@@ -63,7 +63,7 @@ namespace ResponsibilityChain.Tests
             }
         }
 
-        internal class MinuteParser : IWorklogParser
+        internal class MinuteParser : IWorkLogParser
         {
             private readonly Regex _pattern = new Regex("^(\\d+)m$");
 
@@ -81,7 +81,7 @@ namespace ResponsibilityChain.Tests
             }
         }
 
-        internal interface IWorklogParser : IHandler<string, int>
+        internal interface IWorkLogParser : IHandler<string, int>
         {
         }
     }
