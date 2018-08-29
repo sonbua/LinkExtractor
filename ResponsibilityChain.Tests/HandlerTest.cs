@@ -54,7 +54,7 @@ namespace ResponsibilityChain.Tests
             Assert.Throws<ArgumentException>(testDelegate);
         }
 
-        private class WorkLogParser : CompositeHandler<string, int>, IWorkLogParser
+        private class WorkLogParser : Handler<string, int>, IWorkLogParser
         {
             public WorkLogParser()
             {
@@ -62,7 +62,7 @@ namespace ResponsibilityChain.Tests
                 AddHandler(new TechnicalLeaderParser());
             }
 
-            private class WorkLogValidator : CompositeHandler<string, int>, IWorkLogParser
+            private class WorkLogValidator : Handler<string, int>, IWorkLogParser
             {
                 public WorkLogValidator()
                 {
@@ -132,7 +132,7 @@ namespace ResponsibilityChain.Tests
                 }
             }
 
-            private class TechnicalLeaderParser : CompositeHandler<string, int>, IWorkLogParser
+            private class TechnicalLeaderParser : Handler<string, int>, IWorkLogParser
             {
                 public TechnicalLeaderParser()
                 {
