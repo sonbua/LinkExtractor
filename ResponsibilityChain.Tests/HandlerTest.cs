@@ -7,7 +7,7 @@ using Xunit;
 
 namespace ResponsibilityChain.Tests
 {
-    public class CompositeHandlerTest
+    public class HandlerTest
     {
         [Theory]
         [InlineData("20m", 20)]
