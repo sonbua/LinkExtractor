@@ -7,13 +7,13 @@ namespace ResponsibilityChain
     /// </summary>
     /// <typeparam name="TRequest">The request type.</typeparam>
     /// <typeparam name="TResponse">The response type.</typeparam>
-    public sealed class ReturnDefaultHandler<TRequest, TResponse> : IHandler<TRequest, TResponse>
+    public sealed class ReturnDefaultValueHandler<TRequest, TResponse> : IHandler<TRequest, TResponse>
     {
-        static ReturnDefaultHandler()
+        static ReturnDefaultValueHandler()
         {
         }
 
-        private ReturnDefaultHandler()
+        private ReturnDefaultValueHandler()
         {
         }
 
@@ -21,7 +21,7 @@ namespace ResponsibilityChain
         /// Singleton instance of this handler.
         /// </summary>
         public static IHandler<TRequest, TResponse> Instance { get; } =
-            new ReturnDefaultHandler<TRequest, TResponse>();
+            new ReturnDefaultValueHandler<TRequest, TResponse>();
 
         /// <summary>
         /// Returns default value of <typeparamref name="TResponse"/> on invocation.
@@ -29,9 +29,6 @@ namespace ResponsibilityChain
         /// <param name="request"></param>
         /// <param name="next"></param>
         /// <returns></returns>
-        public TResponse Handle(TRequest request, Func<TRequest, TResponse> next)
-        {
-            return default(TResponse);
-        }
+        public TResponse Handle(TRequest request, Func<TRequest, TResponse> next) => default(TResponse);
     }
 }
