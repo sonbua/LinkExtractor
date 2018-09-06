@@ -21,6 +21,27 @@ namespace ResponsibilityChain
         }
 
         /// <summary>
+        /// Builds a chained delegate from the list of handlers.
+        /// </summary>
+        private Func<Func<TRequest, TResponse>, Func<TRequest, TResponse>> ChainedDelegate
+        {
+            get
+            {
+                Func<Func<TRequest, TResponse>, Func<TRequest, TResponse>> chainedDelegate = next => next;
+
+                for (var index = _handlers.Count - 1; index >= 0; index--)
+                {
+                    var handler = _handlers[index];
+                    var chainedDelegateCloned = chainedDelegate;
+
+                    chainedDelegate = next => request => handler.Handle(request, chainedDelegateCloned(next));
+                }
+
+                return chainedDelegate;
+            }
+        }
+
+        /// <summary>
         /// <para>Invokes handlers one by one until the request has been processed by a handler and returns response, ignoring the rest of the handlers.</para>
         /// <para>It is done by first creating a pipeline execution delegate from existing handlers then invoking that delegate against the request.</para>
         /// </summary>
@@ -33,9 +54,12 @@ namespace ResponsibilityChain
         {
             EnsureArg.HasItems(_handlers, nameof(_handlers));
 
-            var handler = _handlers.CreatePipelineExecutionDelegate(next);
+            if (next == null)
+            {
+                next = aRequest => ThrowNotSupportedHandler<TRequest, TResponse>.Instance.Handle(aRequest, null);
+            }
 
-            return handler.Invoke(request);
+            return ChainedDelegate.Invoke(next).Invoke(request);
         }
 
         /// <summary>
