@@ -3,11 +3,11 @@
 namespace ResponsibilityChain
 {
     /// <summary>
-    /// A handler that returns default value of type <typeparamref name="TResponse"/>. This is usually set as the last handler in the chain.
+    /// A handler that returns default value of type <typeparamref name="TOut"/>. This is usually set as the last handler in the chain.
     /// </summary>
-    /// <typeparam name="TRequest">The request type.</typeparam>
-    /// <typeparam name="TResponse">The response type.</typeparam>
-    public sealed class ReturnDefaultValueHandler<TRequest, TResponse> : IHandler<TRequest, TResponse>
+    /// <typeparam name="TIn">The input type.</typeparam>
+    /// <typeparam name="TOut">The output type.</typeparam>
+    public sealed class ReturnDefaultValueHandler<TIn, TOut> : IHandler<TIn, TOut>
     {
         static ReturnDefaultValueHandler()
         {
@@ -20,15 +20,15 @@ namespace ResponsibilityChain
         /// <summary>
         /// Singleton instance of this handler.
         /// </summary>
-        public static IHandler<TRequest, TResponse> Instance { get; } =
-            new ReturnDefaultValueHandler<TRequest, TResponse>();
+        public static IHandler<TIn, TOut> Instance { get; } =
+            new ReturnDefaultValueHandler<TIn, TOut>();
 
         /// <summary>
-        /// Returns default value of <typeparamref name="TResponse"/> on invocation.
+        /// Returns default value of <typeparamref name="TOut"/> on invocation.
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="input"></param>
         /// <param name="next"></param>
         /// <returns></returns>
-        public TResponse Handle(TRequest request, Func<TRequest, TResponse> next) => default(TResponse);
+        public TOut Handle(TIn input, Func<TIn, TOut> next) => default(TOut);
     }
 }

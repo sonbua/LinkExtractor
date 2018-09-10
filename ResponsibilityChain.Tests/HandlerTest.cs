@@ -73,20 +73,20 @@ namespace ResponsibilityChain.Tests
 
                 private class WorkLogMustNotBeNullOrEmptyRule : IWorkLogParser
                 {
-                    public int Handle(string request, Func<string, int> next)
+                    public int Handle(string input, Func<string, int> next)
                     {
-                        EnsureArg.IsNotNullOrEmpty(request, nameof(request));
+                        EnsureArg.IsNotNullOrEmpty(input, nameof(input));
 
-                        return next.Invoke(request);
+                        return next.Invoke(input);
                     }
                 }
 
                 private class ThereShouldBeNoUnitDuplicationRule : IWorkLogParser
                 {
-                    public int Handle(string request, Func<string, int> next)
+                    public int Handle(string input, Func<string, int> next)
                     {
                         var duplicatedUnitGrouping =
-                            request.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)
+                            input.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)
                                 .Select(x => x.Last())
                                 .GroupBy(x => x)
                                 .FirstOrDefault(g => g.Count() > 1);
@@ -96,7 +96,7 @@ namespace ResponsibilityChain.Tests
                             throw new ArgumentException("Duplicate unit: " + duplicatedUnitGrouping.Key);
                         }
 
-                        return next.Invoke(request);
+                        return next.Invoke(input);
                     }
                 }
 
@@ -113,9 +113,9 @@ namespace ResponsibilityChain.Tests
                         };
                     }
 
-                    public int Handle(string request, Func<string, int> next)
+                    public int Handle(string input, Func<string, int> next)
                     {
-                        var units = request.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)
+                        var units = input.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)
                             .Select(x => x.Last());
                         var unitOrders = units.Select(unit => UnitOrderMap[unit]).ToList();
 
@@ -127,7 +127,7 @@ namespace ResponsibilityChain.Tests
                             }
                         }
 
-                        return next.Invoke(request);
+                        return next.Invoke(input);
                     }
                 }
             }
@@ -140,23 +140,23 @@ namespace ResponsibilityChain.Tests
                     AddHandler(new MinuteParser());
                 }
 
-                public override int Handle(string request, Func<string, int> next)
+                public override int Handle(string input, Func<string, int> next)
                 {
-                    return request.Split(' ').Select(piece => base.Handle(piece, next)).Sum();
+                    return input.Split(' ').Select(piece => base.Handle(piece, next)).Sum();
                 }
 
                 private class HourParser : IWorkLogParser
                 {
                     private readonly Regex _pattern = new Regex("^(\\d+)h$");
 
-                    public int Handle(string request, Func<string, int> next)
+                    public int Handle(string input, Func<string, int> next)
                     {
-                        if (!_pattern.IsMatch(request))
+                        if (!_pattern.IsMatch(input))
                         {
-                            return next.Invoke(request);
+                            return next.Invoke(input);
                         }
 
-                        var match = _pattern.Match(request);
+                        var match = _pattern.Match(input);
                         var hourAsText = match.Groups[1].Value;
 
                         return (int) Math.Round(double.Parse(hourAsText) * 60);
@@ -167,14 +167,14 @@ namespace ResponsibilityChain.Tests
                 {
                     private readonly Regex _pattern = new Regex("^(\\d+)m$");
 
-                    public int Handle(string request, Func<string, int> next)
+                    public int Handle(string input, Func<string, int> next)
                     {
-                        if (!_pattern.IsMatch(request))
+                        if (!_pattern.IsMatch(input))
                         {
-                            return next.Invoke(request);
+                            return next.Invoke(input);
                         }
 
-                        var match = _pattern.Match(request);
+                        var match = _pattern.Match(input);
                         var minuteAsText = match.Groups[1].Value;
 
                         return int.Parse(minuteAsText);

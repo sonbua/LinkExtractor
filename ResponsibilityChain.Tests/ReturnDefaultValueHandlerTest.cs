@@ -13,10 +13,10 @@ namespace ResponsibilityChain.Tests
             var handler = ReturnDefaultValueHandler<string, int>.Instance;
 
             // act
-            var response = handler.Handle("some input", next: null);
+            var output = handler.Handle("some input", next: null);
 
             // assert
-            Assert.Equal(0, response);
+            Assert.Equal(0, output);
         }
 
         [Fact]
@@ -26,10 +26,10 @@ namespace ResponsibilityChain.Tests
             var handler = ReturnDefaultValueHandler<string, string>.Instance;
 
             // act
-            var response = handler.Handle("some input", next: null);
+            var output = handler.Handle("some input", next: null);
 
             // assert
-            Assert.Null(response);
+            Assert.Null(output);
         }
 
         [Fact]
@@ -39,10 +39,10 @@ namespace ResponsibilityChain.Tests
             var handler = ReturnDefaultValueHandler<string, DateTime>.Instance;
 
             // act
-            var response = handler.Handle("some input", next: null);
+            var output = handler.Handle("some input", next: null);
 
             // assert
-            Assert.Equal(DateTime.MinValue, response);
+            Assert.Equal(DateTime.MinValue, output);
         }
 
         [Fact]
@@ -52,10 +52,10 @@ namespace ResponsibilityChain.Tests
             var handler = ReturnDefaultValueHandler<string, StringBuilder>.Instance;
 
             // act
-            var response = handler.Handle("some input", next: null);
+            var output = handler.Handle("some input", next: null);
 
             // assert
-            Assert.Null(response);
+            Assert.Null(output);
         }
     }
 }

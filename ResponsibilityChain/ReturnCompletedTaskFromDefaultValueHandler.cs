@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 namespace ResponsibilityChain
 {
     /// <summary>
-    /// A handler that returns a completed task with default value of type <typeparamref name="TResponse"/>. This is usually set as the last handler in the chain.
+    /// A handler that returns a completed task with default value of type <typeparamref name="TOut"/>. This is usually set as the last handler in the chain.
     /// </summary>
-    /// <typeparam name="TRequest">The request type.</typeparam>
-    /// <typeparam name="TResponse">The response type.</typeparam>
-    public sealed class ReturnCompletedTaskFromDefaultValueHandler<TRequest, TResponse> : IHandler<TRequest, Task<TResponse>>
+    /// <typeparam name="TIn">The input type.</typeparam>
+    /// <typeparam name="TOut">The output type.</typeparam>
+    public sealed class ReturnCompletedTaskFromDefaultValueHandler<TIn, TOut> : IHandler<TIn, Task<TOut>>
     {
         static ReturnCompletedTaskFromDefaultValueHandler()
         {
@@ -21,16 +21,15 @@ namespace ResponsibilityChain
         /// <summary>
         /// Singleton instance of this handler.
         /// </summary>
-        public static IHandler<TRequest, Task<TResponse>> Instance { get; } =
-            new ReturnCompletedTaskFromDefaultValueHandler<TRequest, TResponse>();
+        public static IHandler<TIn, Task<TOut>> Instance { get; } =
+            new ReturnCompletedTaskFromDefaultValueHandler<TIn, TOut>();
 
         /// <summary>
-        /// Returns a completed task with default value of <typeparamref name="TResponse"/> on invocation.
+        /// Returns a completed task with default value of <typeparamref name="TOut"/> on invocation.
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="input"></param>
         /// <param name="next"></param>
         /// <returns></returns>
-        public Task<TResponse> Handle(TRequest request, Func<TRequest, Task<TResponse>> next) =>
-            Task.FromResult(default(TResponse));
+        public Task<TOut> Handle(TIn input, Func<TIn, Task<TOut>> next) => Task.FromResult(default(TOut));
     }
 }

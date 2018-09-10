@@ -17,11 +17,11 @@ namespace ResponsibilityChain.Tests
 
             private class BarHandler : IHandler<int, Task>
             {
-                public async Task Handle(int request, Func<int, Task> next)
+                public async Task Handle(int input, Func<int, Task> next)
                 {
                     await Task.Delay(100);
 
-                    await next(request);
+                    await next(input);
                 }
             }
         }

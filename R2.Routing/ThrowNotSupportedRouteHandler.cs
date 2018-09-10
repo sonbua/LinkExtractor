@@ -15,9 +15,9 @@ namespace R2.Routing
 
         public static IRouteHandler Instance { get; } = new ThrowNotSupportedRouteHandler();
 
-        public IEnumerable<string> Handle(Type request, Func<Type, IEnumerable<string>> next)
+        public IEnumerable<string> Handle(Type requestType, Func<Type, IEnumerable<string>> next)
         {
-            throw new NotSupportedException($"Cannot handle this route: {request}");
+            throw new NotSupportedException($"Cannot handle this route: {requestType}");
         }
     }
 }
