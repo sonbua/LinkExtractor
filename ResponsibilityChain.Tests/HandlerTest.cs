@@ -13,7 +13,7 @@ namespace ResponsibilityChain.Tests
         [InlineData("20m", 20)]
         [InlineData("1h", 60)]
         [InlineData("2h 10m", 130)]
-        public void GivenTextWithMinuteUnit_ReturnsCorrectNumberOfMinutes(string workLog, int expected)
+        public void GivenTextWithUnit_ReturnsCorrectNumberOfMinutes(string workLog, int expected)
         {
             // arrange
             IWorkLogParser parser = new WorkLogParser();
