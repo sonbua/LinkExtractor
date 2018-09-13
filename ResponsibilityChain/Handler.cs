@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using EnsureThat;
 
 namespace ResponsibilityChain
@@ -86,6 +87,78 @@ namespace ResponsibilityChain
             var handler = (THandler) serviceProvider.GetService(typeof(THandler));
 
             _handlers.Add(handler);
+        }
+
+        /// <summary>
+        /// Returns a hierarchical view of the chain's structure.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+
+            foreach (var node in AsNodes())
+            {
+                builder.AppendLine(node.ToString());
+            }
+
+            return builder.ToString().TrimEnd();
+        }
+
+        /// <summary>
+        /// Returns current handler as a node along with its child handlers. 
+        /// </summary>
+        /// <param name="indentLevel">The indent level of this handler.</param>
+        /// <returns></returns>
+        private IEnumerable<Node> AsNodes(int indentLevel = 0)
+        {
+            yield return new Node(GetType().FullName, indentLevel);
+
+            var nextIndentLevel = indentLevel + 1;
+
+            foreach (var handler in _handlers)
+            {
+                if (handler is Handler<TIn, TOut> compositeHandler)
+                {
+                    foreach (var node in compositeHandler.AsNodes(nextIndentLevel))
+                    {
+                        yield return node;
+                    }
+                }
+                else
+                {
+                    yield return new Node(handler.GetType().FullName, nextIndentLevel);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Represent a node in the tree.
+        /// </summary>
+        private struct Node
+        {
+            private readonly string _name;
+            private readonly int _indentLevel;
+
+            public Node(string name, int indentLevel)
+            {
+                _name = name;
+                _indentLevel = indentLevel;
+            }
+
+            public override string ToString()
+            {
+                var builder = new StringBuilder();
+
+                for (var i = 0; i < _indentLevel; i++)
+                {
+                    builder.Append("  ");
+                }
+
+                builder.Append(_name);
+
+                return builder.ToString();
+            }
         }
     }
 }
