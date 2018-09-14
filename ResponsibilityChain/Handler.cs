@@ -84,9 +84,16 @@ namespace ResponsibilityChain
         /// </summary>
         /// <typeparam name="THandler">The handler type, which implements <see cref="IHandler{TIn,TOut}"/></typeparam>
         protected void AddHandler<THandler>()
-            where THandler : IHandler<TIn, TOut>
+            where THandler : class, IHandler<TIn, TOut>
         {
             var handler = (THandler) _serviceProvider.GetService(typeof(THandler));
+
+            EnsureArg.IsNotNull(
+                handler,
+                optsFn: options => options.WithMessage(
+                    $"Handler of type {typeof(THandler)} has not been registered with the service provider yet."
+                )
+            );
 
             _handlers.Add(handler);
         }
