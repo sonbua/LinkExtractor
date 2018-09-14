@@ -20,7 +20,7 @@ namespace ResponsibilityChain
         /// <summary>
         /// Singleton instance of this handler.
         /// </summary>
-        public static IHandler<TIn, TOut> Instance { get; } =
+        public static ReturnDefaultValueHandler<TIn, TOut> Instance { get; } =
             new ReturnDefaultValueHandler<TIn, TOut>();
 
         /// <summary>

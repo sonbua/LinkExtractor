@@ -21,7 +21,7 @@ namespace ResponsibilityChain
         /// <summary>
         /// Singleton instance of this handler.
         /// </summary>
-        public static IHandler<TIn, Task<TOut>> Instance { get; } =
+        public static ReturnCompletedTaskFromDefaultValueHandler<TIn, TOut> Instance { get; } =
             new ReturnCompletedTaskFromDefaultValueHandler<TIn, TOut>();
 
         /// <summary>
