@@ -9,6 +9,7 @@ namespace ResponsibilityChain.Tests
         private class CompositeFooAsyncHandler : Handler<int, Task>
         {
             public CompositeFooAsyncHandler()
+                : base(ActivatorServiceProvider.Instance)
             {
                 AddHandler(new BarHandler());
                 AddHandler(ReturnCompletedTaskHandler<int>.Instance);

@@ -57,6 +57,7 @@ namespace ResponsibilityChain.Tests
         private class WorkLogParser : Handler<string, int>, IWorkLogParser
         {
             public WorkLogParser()
+                : base(ActivatorServiceProvider.Instance)
             {
                 AddHandler(new WorkLogValidator());
                 AddHandler(new TechnicalLeaderParser());
@@ -65,6 +66,7 @@ namespace ResponsibilityChain.Tests
             private class WorkLogValidator : Handler<string, int>, IWorkLogParser
             {
                 public WorkLogValidator()
+                    : base(ActivatorServiceProvider.Instance)
                 {
                     AddHandler(new WorkLogMustNotBeNullOrEmptyRule());
                     AddHandler(new ThereShouldBeNoUnitDuplicationRule());
@@ -135,6 +137,7 @@ namespace ResponsibilityChain.Tests
             private class TechnicalLeaderParser : Handler<string, int>, IWorkLogParser
             {
                 public TechnicalLeaderParser()
+                    : base(ActivatorServiceProvider.Instance)
                 {
                     AddHandler(new HourParser());
                     AddHandler(new MinuteParser());

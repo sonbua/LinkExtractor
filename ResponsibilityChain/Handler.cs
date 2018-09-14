@@ -12,12 +12,17 @@ namespace ResponsibilityChain
     /// <typeparam name="TOut">The output type.</typeparam>
     public abstract class Handler<TIn, TOut> : IHandler<TIn, TOut>
     {
+        private readonly IServiceProvider _serviceProvider;
         private readonly List<IHandler<TIn, TOut>> _handlers;
 
         /// <summary>
         /// </summary>
-        protected Handler()
+        /// <param name="serviceProvider"></param>
+        protected Handler(IServiceProvider serviceProvider)
         {
+            EnsureArg.IsNotNull(serviceProvider, nameof(serviceProvider));
+
+            _serviceProvider = serviceProvider;
             _handlers = new List<IHandler<TIn, TOut>>();
         }
 
@@ -75,16 +80,13 @@ namespace ResponsibilityChain
         }
 
         /// <summary>
-        /// Uses <paramref name="serviceProvider"/> to locate a handler instance of type <typeparamref name="THandler"/>, which implements <see cref="IHandler{TIn,TOut}"/>, and then adds it to the last position in the chain.
+        /// Uses the injected service provider to locate a handler instance of type <typeparamref name="THandler"/>, which implements <see cref="IHandler{TIn,TOut}"/>, and then adds it to the last position in the chain.
         /// </summary>
-        /// <param name="serviceProvider"></param>
         /// <typeparam name="THandler">The handler type, which implements <see cref="IHandler{TIn,TOut}"/></typeparam>
-        protected void AddHandler<THandler>(IServiceProvider serviceProvider)
+        protected void AddHandler<THandler>()
             where THandler : IHandler<TIn, TOut>
         {
-            EnsureArg.IsNotNull(serviceProvider, nameof(serviceProvider));
-
-            var handler = (THandler) serviceProvider.GetService(typeof(THandler));
+            var handler = (THandler) _serviceProvider.GetService(typeof(THandler));
 
             _handlers.Add(handler);
         }
