@@ -3,7 +3,7 @@ using Autofac;
 using R2.DependencyRegistration.Autofac.Extensions;
 using Module = Autofac.Module;
 
-namespace R2.Routing.DefaultHandler.DependencyRegistration.Autofac
+namespace R2.Routing.DefaultHandlers.DependencyRegistration.Autofac
 {
     public class RoutingDefaultHandlerModule : Module
     {
