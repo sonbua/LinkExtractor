@@ -7,8 +7,6 @@ namespace Brick.IO
 {
     public class FileSystemVirtualFiles : VirtualPathProvider, IVirtualFiles
     {
-        private readonly DirectoryInfo _rootDirectoryInfo;
-
         public FileSystemVirtualFiles(string rootDirectoryPath)
             : this(new DirectoryInfo(rootDirectoryPath))
         {
@@ -25,8 +23,7 @@ namespace Brick.IO
                 )
             );
 
-            _rootDirectoryInfo = rootDirectoryInfo;
-            RootDirectory = new FileSystemVirtualDirectory(this, NullVirtualDirectory.Instance, _rootDirectoryInfo);
+            RootDirectory = new FileSystemVirtualDirectory(this, NullVirtualDirectory.Instance, rootDirectoryInfo);
         }
 
         public override IVirtualDirectory RootDirectory { get; }
